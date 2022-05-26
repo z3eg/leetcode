@@ -4,42 +4,26 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Deque;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Queue;
 import java.util.Set;
-import java.util.TreeSet;
 
 import static org.junit.Assert.assertEquals;
 
 //https://leetcode.com/problems/combination-sum/
 public class _39_CombinationSum {
 
-    private class Node {
-        Node parent;
-        int val;
-        List<Node> children;
-
-        public Node(int val, Node parent) {
-            this.val = val;
-            this.parent = parent;
-            this.children = new LinkedList<>();
-        }
-    }
-
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<Integer> candidatesList = getCandidatesList(candidates);
-        Node root = new Node(0, null);
-        Set<List<Integer>> set = new HashSet<List<Integer>>();
-        buildATree(root,candidatesList,0,target,set);
+        Set<List<Integer>> set = new HashSet<>();
+        LinkedList<Integer> result = new LinkedList<>();
+        buildATree(result,candidatesList,0,target,set);
         return set.stream().toList();
     }
 
-    public void buildATree(Node root, List<Integer> candidates, int curSum, int target, Set<List<Integer>> resultSet) {
+    public void buildATree(List<Integer> result, List<Integer> candidates, int curSum, int target, Set<List<Integer>> resultSet) {
         if (!candidates.isEmpty()) {
             ListIterator<Integer> iterator = candidates.listIterator(candidates.size());
             while (iterator.hasPrevious()) {
@@ -48,19 +32,15 @@ public class _39_CombinationSum {
                     iterator.remove();
                 }
                 else if (curSum+candidate == target) {
-                    Node node = new Node(candidate, root);
-                    root.children.add(node);
-                    LinkedList<Integer> thisBranch = new LinkedList<>();
-                    while (node.parent!=null) {
-                        thisBranch.add(node.val);
-                        node = node.parent;
-                    }
+                    LinkedList<Integer> thisBranch = new LinkedList<>(result);
+                    thisBranch.add(candidate);
                     thisBranch.sort(Comparator.naturalOrder());
                     resultSet.add(thisBranch);
                 }
                 else {
-                    Node node = new Node(candidate, root);
-                    buildATree(node, new LinkedList<Integer>(candidates), curSum+candidate, target, resultSet);
+                    LinkedList<Integer> thisBranch = new LinkedList<>(result);
+                    thisBranch.add(candidate);
+                    buildATree(thisBranch, new LinkedList<>(candidates), curSum+candidate, target, resultSet);
                 }
             }
         }
@@ -74,7 +54,7 @@ public class _39_CombinationSum {
         return integers;
     }
 
-    @Test
+    /*@Test
     public void testTree() {
         int target = 7;
         int[] candidates = {2,3,6,7};
@@ -83,7 +63,7 @@ public class _39_CombinationSum {
         Set<List<Integer>> set = new HashSet<List<Integer>>();
         buildATree(root,candidatesList,0,target,set);
         System.out.println(set);
-    }
+    }*/
 
     @Test
     public void test() {
