@@ -1,4 +1,4 @@
-package com.company._1588;
+package com.company;
 
 import java.util.Arrays;
 

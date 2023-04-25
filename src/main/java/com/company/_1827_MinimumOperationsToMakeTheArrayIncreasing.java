@@ -1,4 +1,4 @@
-package com.company._1588;
+package com.company;
 
 //https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/
 public class _1827_MinimumOperationsToMakeTheArrayIncreasing {

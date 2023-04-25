@@ -1,4 +1,4 @@
-package com.company._1588;
+package com.company;
 
 import org.junit.Test;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //https://leetcode.com/problems/sum-of-all-odd-length-subarrays/
-public class _SumOfAllOddLengthSubarrays {
+public class _1588_SumOfAllOddLengthSubarrays {
 
     //TODO optimize this (can use already calculated arrays and just add new elements)
     public int sumOddLengthSubarrays(int[] arr) {
