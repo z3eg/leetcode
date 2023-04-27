@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.util.TreeNode;
+
 public class _617_MergeTwoBinaryTrees {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1==null && root2!=null)
