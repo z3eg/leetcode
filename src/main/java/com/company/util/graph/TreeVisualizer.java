@@ -57,8 +57,8 @@ public class TreeVisualizer {
     @Test
     public void test() throws InterruptedException {
 //        TreeNode treeNode = generateSampleTree();
-//        TreeNode treeNode = convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
-        TreeNode treeNode = convert("[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]");
+        TreeNode treeNode = convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
+//        TreeNode treeNode = convert("[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]");
         draw(treeNode, null);
     }
 
