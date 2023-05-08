@@ -17,7 +17,7 @@ public class TreeVisualizer {
     private static Graph graph;
     private static int accent;
 
-    public static void draw(TreeNode root, TreeNode parent) throws InterruptedException {
+    public static void draw(TreeNode root) throws InterruptedException {
         System.setProperty("org.graphstream.ui", "swing");
         graph = new MultiGraph("Graph");
         Viewer viewer = graph.display();
@@ -45,7 +45,7 @@ public class TreeVisualizer {
             graph.addEdge(curIndexS, parIndex, curIndexS, true);
             Edge edge = graph.getEdge(curIndexS);
             edge.setAttribute("ui.style", "text-size: 18; fill-color: #"+(isLeft?"9900":"0099")+"00;");
-            edge.setAttribute("ui.label", isLeft?"less":"more");
+//            edge.setAttribute("ui.label", isLeft?"less":"more");
             curIndex++;
         }
         if (root.left!=null)
@@ -57,9 +57,10 @@ public class TreeVisualizer {
     @Test
     public void test() throws InterruptedException {
 //        TreeNode treeNode = generateSampleTree();
-        TreeNode treeNode = convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
+//        TreeNode treeNode = convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
+        TreeNode treeNode = convert("[4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8]");
 //        TreeNode treeNode = convert("[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]");
-        draw(treeNode, null);
+        draw(treeNode);
     }
 
     private static void decreaseAccent() {

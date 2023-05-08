@@ -29,7 +29,7 @@ public class _1038_BinarySearchTreeToGreaterSumTree {
     public void test() throws InterruptedException {
         TreeNode root = ArrayToTreeConverter.convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
         TreeNode newRoot = bstToGst(root);
-        TreeVisualizer.draw(newRoot, null);
+        TreeVisualizer.draw(newRoot);
     }
 
 
