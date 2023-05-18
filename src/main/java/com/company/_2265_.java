@@ -1,10 +1,9 @@
 package com.company;
 
-import com.company.util.ArrayToTreeConverter;
-import com.company.util.TreeNode;
+import com.company.util.tree.TreeBuilder;
+import com.company.util.tree.TreeNode;
 import org.junit.Test;
 
-import static com.company.util.graph.TreeVisualizer.draw;
 import static org.junit.Assert.assertEquals;
 
 //https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/
@@ -42,9 +41,9 @@ public class _2265_ {
 
     @Test
     public void test() throws InterruptedException {
-        TreeNode tree = ArrayToTreeConverter.convert("1,null,3,null,1,null,3");
+        TreeNode tree = TreeBuilder.convert("1,null,3,null,1,null,3");
 //        draw(tree);
         assertEquals(1, averageOfSubtree(tree));
-        assertEquals(5, averageOfSubtree(ArrayToTreeConverter.convert("4,8,5,0,1,null,6")));
+        assertEquals(5, averageOfSubtree(TreeBuilder.convert("4,8,5,0,1,null,6")));
     }
 }

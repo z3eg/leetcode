@@ -1,8 +1,8 @@
 package com.company;
 
-import com.company.util.ArrayToTreeConverter;
-import com.company.util.TreeNode;
-import com.company.util.graph.TreeVisualizer;
+import com.company.util.tree.TreeBuilder;
+import com.company.util.tree.TreeNode;
+import com.company.util.tree.TreeVisualizer;
 import org.junit.Test;
 
 //https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/
@@ -27,7 +27,7 @@ public class _1038_BinarySearchTreeToGreaterSumTree {
 
     @Test
     public void test() throws InterruptedException {
-        TreeNode root = ArrayToTreeConverter.convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
+        TreeNode root = TreeBuilder.convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
         TreeNode newRoot = bstToGst(root);
         TreeVisualizer.draw(newRoot);
     }

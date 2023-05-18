@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.util.TreeNode;
+import com.company.util.tree.TreeNode;
 
 public class _617_MergeTwoBinaryTrees {
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {

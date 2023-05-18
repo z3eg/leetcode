@@ -1,7 +1,5 @@
 package com.company;
 
-import com.company.util.TreeNode;
-import com.company.util.graph.TreeVisualizer;
 import org.junit.Test;
 
 import java.util.Arrays;

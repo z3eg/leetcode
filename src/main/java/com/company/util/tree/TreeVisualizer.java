@@ -1,6 +1,5 @@
-package com.company.util.graph;
+package com.company.util.tree;
 
-import com.company.util.TreeNode;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -8,8 +7,8 @@ import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.view.Viewer;
 import org.junit.Test;
 
-import static com.company.util.ArrayToTreeConverter.convert;
-import static com.company.util.ArrayToTreeConverter.generateSampleTree;
+import static com.company.util.ColorUtils.increaseAccent;
+import static com.company.util.tree.TreeBuilder.convert;
 
 public class TreeVisualizer {
 
@@ -37,7 +36,7 @@ public class TreeVisualizer {
         curIndex++;
         Node node = graph.getNode(curIndexS);
         node.setAttribute("ui.style", "shape:circle;fill-color: #" +(isLeft?accent+"00":"00"+accent)+"00; text-color: white; size: 30px; text-alignment: center; text-size: 36;");
-        increaseAccent();
+        accent = increaseAccent(accent);
         node.setAttribute("ui.label", rootVal);
         node.setAttribute("x", x);
         node.setAttribute("y", y);
@@ -63,13 +62,5 @@ public class TreeVisualizer {
         draw(treeNode);
     }
 
-    private static void decreaseAccent() {
-        if (accent >=11)
-            accent -=11;
-    }
 
-    private static void increaseAccent() {
-        if (accent <=88)
-            accent +=11;
-    }
 }

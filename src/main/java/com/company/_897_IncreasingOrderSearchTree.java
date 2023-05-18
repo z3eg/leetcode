@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.util.TreeNode;
+import com.company.util.tree.TreeNode;
 
 //https://leetcode.com/problems/increasing-order-search-tree/
 public class _897_IncreasingOrderSearchTree {

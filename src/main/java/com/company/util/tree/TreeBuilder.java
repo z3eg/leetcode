@@ -1,17 +1,12 @@
-package com.company.util;
+package com.company.util.tree;
 
+import com.company.util.StringToArrayConverter;
 import org.junit.Test;
 
-import java.util.Objects;
+public class TreeBuilder {
 
-public class ArrayToTreeConverter {
-
-    public static TreeNode convert(String arrayString) {
-//        [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
-        arrayString = arrayString.replaceAll("\\[","");
-        arrayString = arrayString.replaceAll("]","");
-        String[] splitRes = arrayString.split(",");
-        return buildTreeFromArray(splitRes, 1);
+    public static TreeNode convert(String str) {
+        return buildTreeFromArray(StringToArrayConverter.convert(str), 0);
     }
 
     public static TreeNode buildTreeFromArray(String[] array, int number) {

@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.util.TreeNode;
+import com.company.util.tree.TreeNode;
 
 import java.util.Arrays;
 

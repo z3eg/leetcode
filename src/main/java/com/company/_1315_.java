@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.util.TreeNode;
+import com.company.util.tree.TreeNode;
 
 //https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/
 //1315. Sum of Nodes with Even-Valued Grandparent
