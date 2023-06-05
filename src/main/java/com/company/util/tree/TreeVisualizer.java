@@ -57,8 +57,10 @@ public class TreeVisualizer {
     public void test() throws InterruptedException {
 //        TreeNode treeNode = generateSampleTree();
 //        TreeNode treeNode = convert("[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]");
-        TreeNode treeNode = convert("[4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8]");
+//        TreeNode treeNode = convert("[4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8]");
 //        TreeNode treeNode = convert("[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]");
+        //FIXME
+        TreeNode treeNode = TreeBuilder.convert("[1,null,2,null,3,null,4]"); //TODO
         draw(treeNode);
     }
 

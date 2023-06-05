@@ -6,7 +6,7 @@ import org.junit.Test;
 public class TreeBuilder {
 
     public static TreeNode convert(String str) {
-        return buildTreeFromArray(StringToArrayConverter.convert(str), 0);
+        return buildTreeFromArray(StringToArrayConverter.convert(str), 1);
     }
 
     public static TreeNode buildTreeFromArray(String[] array, int number) {
