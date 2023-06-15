@@ -3,7 +3,6 @@ package com.company;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,8 +46,8 @@ public class _2352 {
             sb.append("_");
         }
         return sb.toString();
-    }
-*/
+    }*/
+
     /*Runtime
     44 ms
     Beats
@@ -68,8 +67,6 @@ public class _2352 {
         }
         return res;
     }
-
-
 
     @Test
     public void test() {
