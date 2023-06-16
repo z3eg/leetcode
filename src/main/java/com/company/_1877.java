@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class _1877 {
     /*beats 12.3%-42.39%*/
+    //test comment
     public int minPairSum(int[] nums) {
         Arrays.sort(nums);
         int max = Integer.MIN_VALUE;
