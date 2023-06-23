@@ -8,7 +8,6 @@ import org.graphstream.ui.view.Viewer;
 import org.junit.Test;
 
 import static com.company.util.ColorUtils.increaseAccent;
-import static com.company.util.tree.TreeBuilder.convert;
 
 public class TreeVisualizer {
 
@@ -16,7 +15,7 @@ public class TreeVisualizer {
     private static Graph graph;
     private static int accent;
 
-    public static void draw(TreeNode root) throws InterruptedException {
+    public static void draw(BSTNode root) throws InterruptedException {
         System.setProperty("org.graphstream.ui", "swing");
         graph = new MultiGraph("Graph");
         Viewer viewer = graph.display();
@@ -29,7 +28,7 @@ public class TreeVisualizer {
         Thread.sleep(999999999);
     }
 
-    public static void visualize(TreeNode root, String parIndex, boolean isLeft, int x, int y, int xDiff) {
+    public static void visualize(BSTNode root, String parIndex, boolean isLeft, int x, int y, int xDiff) {
         String rootVal = String.valueOf(root.val);
         String curIndexS = String.valueOf(curIndex);
         graph.addNode(curIndexS);
@@ -60,8 +59,8 @@ public class TreeVisualizer {
 //        TreeNode treeNode = convert("[4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8,4,1,6,0,2,5,7,3,8,4,1,6,0,2,5,7,8]");
 //        TreeNode treeNode = convert("[30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]");
         //FIXME
-        TreeNode treeNode = TreeBuilder.convert("[1,null,2,null,3,null,4]"); //TODO
-        draw(treeNode);
+        BSTNode BSTNode = TreeBuilder.convert("[1,null,2,null,3,null,4]"); //TODO
+        draw(BSTNode);
     }
 
 

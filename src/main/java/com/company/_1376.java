@@ -1,19 +1,7 @@
 package com.company;
 
-import com.company.util.tree.TreeNode;
-import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
-import org.graphstream.graph.Node;
-import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.ui.view.Viewer;
 import org.junit.Test;
-
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import static com.company.util.ColorUtils.increaseAccent;
 import static org.junit.Assert.assertEquals;

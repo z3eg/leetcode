@@ -5,15 +5,15 @@ import org.junit.Test;
 
 public class TreeBuilder {
 
-    public static TreeNode convert(String str) {
+    public static BSTNode convert(String str) {
         return buildTreeFromArray(StringToArrayConverter.convert(str), 1);
     }
 
-    public static TreeNode buildTreeFromArray(String[] array, int number) {
+    public static BSTNode buildTreeFromArray(String[] array, int number) {
         if (number-1<array.length) {
             String val = array[number-1];
             if (!"null".equals(val)) {
-                TreeNode curNode = new TreeNode(Integer.parseInt(val));
+                BSTNode curNode = new BSTNode(Integer.parseInt(val));
                 curNode.left = buildTreeFromArray(array, number*2);
                 curNode.right = buildTreeFromArray(array, number*2+1);
                 return curNode;
@@ -22,26 +22,26 @@ public class TreeBuilder {
         return null;
     }
 
-    public static TreeNode generateSampleTree() {
+    public static BSTNode generateSampleTree() {
         //    https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/
-        TreeNode four = new TreeNode(4);
-        TreeNode one = new TreeNode(1);
+        BSTNode four = new BSTNode(4);
+        BSTNode one = new BSTNode(1);
         four.left = one;
-        TreeNode six = new TreeNode(6);
+        BSTNode six = new BSTNode(6);
         four.right = six;
-        TreeNode zero = new TreeNode(0);
+        BSTNode zero = new BSTNode(0);
         one.left = zero;
-        TreeNode minusOne = new TreeNode(-1);
+        BSTNode minusOne = new BSTNode(-1);
         zero.left = minusOne;
-        TreeNode two = new TreeNode(2);
+        BSTNode two = new BSTNode(2);
         one.right = two;
-        TreeNode five = new TreeNode(5);
+        BSTNode five = new BSTNode(5);
         six.left = five;
-        TreeNode seven = new TreeNode(7);
+        BSTNode seven = new BSTNode(7);
         six.right = seven;
-        TreeNode three = new TreeNode(3);
+        BSTNode three = new BSTNode(3);
         two.right = three;
-        TreeNode eight = new TreeNode(8);
+        BSTNode eight = new BSTNode(8);
         seven.right = eight;
         return four;
     }

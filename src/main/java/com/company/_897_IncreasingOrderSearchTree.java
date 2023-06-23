@@ -1,17 +1,17 @@
 package com.company;
 
-import com.company.util.tree.TreeNode;
+import com.company.util.tree.BSTNode;
 
 //https://leetcode.com/problems/increasing-order-search-tree/
 public class _897_IncreasingOrderSearchTree {
 
-    public TreeNode increasingBST(TreeNode root) {
-        TreeNode newRoot = new TreeNode();
+    public BSTNode increasingBST(BSTNode root) {
+        BSTNode newRoot = new BSTNode();
         append(newRoot, root);
         return newRoot.right;
     }
 
-    public TreeNode append(TreeNode appender, TreeNode root) {
+    public BSTNode append(BSTNode appender, BSTNode root) {
         if (root.left!=null) {
             appender = append(appender, root.left);
             root.left = null;

@@ -1,13 +1,13 @@
 package com.company;
 
-import com.company.util.tree.TreeNode;
+import com.company.util.tree.BSTNode;
 
 import java.util.Arrays;
 
 /*https://leetcode.com/problems/maximum-binary-tree/
 654. Maximum Binary Tree*/
 public class _654 {
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
+    public BSTNode constructMaximumBinaryTree(int[] nums) {
         int max = Integer.MIN_VALUE;
         int maxPos = 0;
         for (int i = 0; i < nums.length; i++) {
@@ -16,7 +16,7 @@ public class _654 {
                 maxPos = i;
             }
         }
-        TreeNode root = new TreeNode(max);
+        BSTNode root = new BSTNode(max);
         if (maxPos > 0) {
             int[] leftPart = Arrays.copyOfRange(nums, 0, maxPos);
             root.left = constructMaximumBinaryTree(leftPart);

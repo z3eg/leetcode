@@ -1,21 +1,19 @@
 package com.company;
 
-import com.company.util.StringToArrayConverter;
 import com.company.util.tree.TreeBuilder;
-import com.company.util.tree.TreeNode;
+import com.company.util.tree.BSTNode;
 import com.company.util.tree.TreeVisualizer;
 import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /*1382. Balance a Binary Search Tree
 https://leetcode.com/problems/balance-a-binary-search-tree/*/
 public class _1382 {
 
-    public TreeNode balanceBST(TreeNode root) {
+    public BSTNode balanceBST(BSTNode root) {
         TreeSet<Integer> set = new TreeSet<>();
         fillSet(set, root);
         int i = set.size() / 2;
@@ -25,7 +23,7 @@ public class _1382 {
             iterator.next();
             index++;
         }
-        TreeNode newRoot = new TreeNode(iterator.next());
+        BSTNode newRoot = new BSTNode(iterator.next());
         while (iterator.hasNext()) {
             addNode(newRoot, iterator.next());
         }
@@ -38,7 +36,7 @@ public class _1382 {
         return newRoot;
     }
 
-    private void fillSet(Set set, TreeNode root) {
+    private void fillSet(Set set, BSTNode root) {
         if (root != null) {
             set.add(root.val);
         }
@@ -48,16 +46,16 @@ public class _1382 {
         }
     }
 
-    private void addNode(TreeNode root, int val) {
+    private void addNode(BSTNode root, int val) {
         if (root.val > val) {
             if (root.left == null)
-                root.left = new TreeNode(val);
+                root.left = new BSTNode(val);
             else
                 addNode(root.left, val);
         }
         else {
             if (root.right == null)
-                root.right = new TreeNode(val);
+                root.right = new BSTNode(val);
             else
                 addNode(root.right, val);
         }
