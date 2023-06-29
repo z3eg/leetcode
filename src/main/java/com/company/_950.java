@@ -12,6 +12,10 @@ import static org.junit.Assert.assertArrayEquals;
 /*950. Reveal Cards In Increasing Order
         https://leetcode.com/problems/reveal-cards-in-increasing-order/*/
 public class _950 {
+    /*Runtime
+    46 ms
+    Beats
+    5.19%*/
     public int[] deckRevealedIncreasing(int[] deck) {
         //get the desired state
         Arrays.sort(deck);
