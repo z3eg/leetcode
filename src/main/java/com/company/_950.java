@@ -47,6 +47,7 @@ public class _950 {
         return deck;
     }
 
+
     @Test
     public void test() {
         assertArrayEquals(new int[]{2,13,3,11,5,17,7}, deckRevealedIncreasing(new int[]{17,13,11,2,3,5,7}));
