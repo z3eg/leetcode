@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.util.tree.BSTNode;
+import com.company.util.tree.bst.TreeNode;
 
 public class _530 {
 
@@ -33,12 +33,12 @@ public class _530 {
     int lastObserved = -1;
     int minDiff = Integer.MAX_VALUE;
 
-    public int getMinimumDifference(BSTNode root) {
+    public int getMinimumDifference(TreeNode root) {
         getAll(root);
         return minDiff;
     }
 
-    public void getAll(BSTNode root) {
+    public void getAll(TreeNode root) {
         if (root.left!=null)
             getAll(root.left);
         subtract(root.val);

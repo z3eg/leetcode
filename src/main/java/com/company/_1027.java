@@ -1,10 +1,6 @@
 package com.company;
 
-import com.company.util.tree.BSTNode;
-import com.company.util.tree.TreeNode;
 import org.junit.Test;
-
-import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
 

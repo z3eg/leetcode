@@ -1,9 +1,9 @@
 package com.company;
 
-import com.company.util.tree.BSTNode;
+import com.company.util.tree.bst.TreeNode;
 
 public class _617_MergeTwoBinaryTrees {
-    public BSTNode mergeTrees(BSTNode root1, BSTNode root2) {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         if (root1==null && root2!=null)
             return root2;
         if (root1!=null && root2!=null) {

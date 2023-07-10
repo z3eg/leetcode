@@ -1,11 +1,11 @@
 package com.company;
 
-import com.company.util.tree.BSTNode;
+import com.company.util.tree.bst.TreeNode;
 
 //https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/
 //1315. Sum of Nodes with Even-Valued Grandparent
 public class _1315_ {
-    public int sumEvenGrandparent(BSTNode root) {
+    public int sumEvenGrandparent(TreeNode root) {
         int sum = 0;
         if (root.left!= null) {
             sum+= sumEvenGrandparent(root.left);
