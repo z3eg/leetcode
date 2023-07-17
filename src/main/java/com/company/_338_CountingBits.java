@@ -1,5 +1,9 @@
 package com.company;
 
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
 public class _338_CountingBits {
 
     /*Runtime
@@ -21,5 +25,10 @@ public class _338_CountingBits {
             n/=2;
         }
         return res;
+    }
+
+    @Test
+    public void test() {
+        System.out.println(Arrays.toString(countBits(20)));
     }
 }
