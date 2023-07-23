@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class W_355_2 {
 
     public long maxArrayValue(int[] nums) {
-        List<Integer> list = new LinkedList<>();
+        List<Long> list = new LinkedList<>();
         for (int n : nums) {
-            list.add(n);
+            list.add((long) n);
         }
         boolean merged = true;
         while (merged) {
@@ -31,8 +31,8 @@ public class W_355_2 {
                 }
             }
         }
-        int max = Integer.MIN_VALUE;
-        for (int i : list) {
+        long max = Long.MIN_VALUE;
+        for (long i : list) {
             max = Math.max(max, i);
         }
         return max;
@@ -40,6 +40,9 @@ public class W_355_2 {
 
     @Test
     public void test() {
+        assertEquals(14, maxArrayValue(new int[]{1,2,3,4,4}));
+        assertEquals(6, maxArrayValue(new int[]{1,1,1,1,1,1}));
+        assertEquals(21, maxArrayValue(new int[]{21}));
         assertEquals(21, maxArrayValue(new int[]{2,3,7,9,3}));
         assertEquals(11, maxArrayValue(new int[]{5,3,3}));
     }
