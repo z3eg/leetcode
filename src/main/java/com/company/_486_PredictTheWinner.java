@@ -13,7 +13,7 @@ public class _486_PredictTheWinner {
 
     /*-ms
     Beats 100.00%of users with Java*/
-    public boolean PredictTheWinner(int[] nums) {
+    /*public boolean PredictTheWinner(int[] nums) {
         if (Arrays.equals(nums, new int[]{1000, 1000, 1000, 0, 0, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000}))
             return true;
         if (Arrays.equals(nums, new int[]{3606449,6,5,9,452429,7,9580316,9857582,8514433,9,6,6614512,753594,5474165,4,2697293,8,7,1}))
@@ -22,7 +22,7 @@ public class _486_PredictTheWinner {
             return false;
         if (Arrays.equals(nums, new int[]{601,49373,38681,14134,577,28610,57699,258,19236,88206,490,202,73112,526,39634,811,1032,28458,462}))
             return false;
-        /*58 / 62 testcases passed w/o this gimmicky shit above*/
+        *//*58 / 62 testcases passed w/o this gimmicky shit above*//*
         //TODO write an actually legit algorithm
         int p1Sum = 0;
         int p2Sum = 0;
@@ -58,15 +58,46 @@ public class _486_PredictTheWinner {
             p1Turn = !p1Turn;
         }
         return p1Sum>=p2Sum;
+    }*/
+
+    public boolean PredictTheWinner(int[] nums) {
+        return predictTheWinner(nums, 0, nums.length-1, 0, 0, true, true) ||
+                predictTheWinner(nums, 0, nums.length-1, 0, 0, true, false);
+    }
+
+    public boolean predictTheWinner(int[] nums, int l, int r, int p1, int p2, boolean p1Turn, boolean pickLeft) {
+        if (l>r)
+            return p1>=p2;
+        else {
+            int num;
+            int newP1 = p1;
+            int newP2 = p2;
+            int newL = l;
+            int newR = r;
+            if (pickLeft) {
+                num = nums[newL];
+                newL++;
+            }
+            else {
+                num = nums[newR];
+                newR--;
+            }
+            if (p1Turn)
+                newP1 = newP1+num;
+            else
+                newP2 = newP2+num;
+            return (predictTheWinner(nums, newL, newR, newP1, newP2, !p1Turn, true)) ||
+                    predictTheWinner(nums, newL, newR, newP1, newP2, !p1Turn, false);
+        }
     }
 
     @Test
     public void test() {
+        assertFalse(PredictTheWinner(new int[]{1,5,2}));
         assertFalse(PredictTheWinner(new int[]{601,49373,38681,14134,577,28610,57699,258,19236,88206,490,202,73112,526,39634,811,1032,28458,462}));
         assertFalse(PredictTheWinner(new int[]{1921045,6,5132440,5,3,6610604,7,8650002,6337645,3740419,5242495,3729694,1,4293537,3,2,5,9278,4}));
         assertFalse(PredictTheWinner(new int[]{3606449,6,5,9,452429,7,9580316,9857582,8514433,9,6,6614512,753594,5474165,4,2697293,8,7,1}));
         assertTrue(PredictTheWinner(new int[]{1000, 1000, 1000, 0, 0, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000}));
-        assertFalse(PredictTheWinner(new int[]{1,5,2}));
         assertTrue(PredictTheWinner(new int[]{1,5,233,7}));
         assertTrue(PredictTheWinner(new int[]{28}));
     }
