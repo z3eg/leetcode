@@ -10,28 +10,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 https://leetcode.com/problems/letter-combinations-of-a-phone-number/*/
 public class _17 {
 
-    /*7ms
-    Beats 11.76%of users with Java*/
+    /*5ms
+Beats 50.30%of users with Java*/
     public List<String> letterCombinations(String digits) {
-        Set<String> tmpRes = new HashSet<>();
-        Set<String> curVals = new HashSet<>();
-        curVals.add("");
-        addToList(digits, curVals, tmpRes, digits.length());
-        return new LinkedList<>(tmpRes);
+        List<String> res = new LinkedList<>();
+        addToList(digits, "", res, digits.length());
+        return res;
     }
 
-    public void addToList(String digits, Set<String> curVals, Set<String> res, int totalLen) {
+    public void addToList(String digits, String curS, List<String> res, int totalLen) {
         if (digits.length()>0) {
-            Set<String> newVals = new HashSet<>();
-            for (String val : curVals) {
-                char[] digLets = getLetsFromDig(digits.charAt(0));
-                for (char c : digLets) {
-                    String s = val + c;
-                    newVals.add(s);
-                    if (s.length()==totalLen)
-                        res.add(s);
+            char[] digLets = getLetsFromDig(digits.charAt(0));
+            for (char c : digLets) {
+                String s = curS + c;
+                if (s.length()==totalLen)
+                    res.add(s);
+                else {
+                    addToList(digits.substring(1), s, res, totalLen);
                 }
-                addToList(digits.substring(1), newVals, res, totalLen);
             }
         }
     }
