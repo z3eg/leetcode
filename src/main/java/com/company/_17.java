@@ -14,19 +14,19 @@ public class _17 {
 Beats 50.30%of users with Java*/
     public List<String> letterCombinations(String digits) {
         List<String> res = new LinkedList<>();
-        addToList(digits, "", res, digits.length());
+        addToList(digits, 0,"", res, digits.length());
         return res;
     }
 
-    public void addToList(String digits, String curS, List<String> res, int totalLen) {
-        if (digits.length()>0) {
-            char[] digLets = getLetsFromDig(digits.charAt(0));
+    public void addToList(String digits, int pos, String curS, List<String> res, int totalLen) {
+        if (digits.length()>pos) {
+            char[] digLets = getLetsFromDig(digits.charAt(pos));
             for (char c : digLets) {
                 String s = curS + c;
                 if (s.length()==totalLen)
                     res.add(s);
                 else {
-                    addToList(digits.substring(1), s, res, totalLen);
+                    addToList(digits, pos+1, s, res, totalLen);
                 }
             }
         }
