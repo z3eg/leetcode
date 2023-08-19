@@ -4,7 +4,9 @@ import java.util.*;
 
 public class _1615_MaximalNetworkRank {
 
-    public int maximalNetworkRank(int n, int[][] roads) {
+   /* 603ms
+    Beats 5.49%of users with Java*/
+    /*public int maximalNetworkRank(int n, int[][] roads) {
         int[] cityRoadCount = new int[n];
         for (int[] road : roads) {
             cityRoadCount[road[0]]++;
@@ -65,5 +67,27 @@ public class _1615_MaximalNetworkRank {
             return largestPair.getKey()+nextLargestPair.getKey()-1;
         }
 
+    }*/
+
+    /*40ms
+    Beats 15.81%of users with Java*/
+    public int maximalNetworkRank(int n, int[][] roads) {
+        int[] ranks = new int[n];
+        HashSet<String> set = new HashSet<>();
+        for (int[] road : roads) {
+            ranks[road[0]]++;
+            ranks[road[1]]++;
+            set.add(road[0] + "_" + road[1]);
+        }
+        int maxRank = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) {
+                int curRank = ranks[i]+ranks[j];
+                if (set.contains(i+"_" +j) || set.contains(j+"_" +i))
+                    curRank--;
+                maxRank = Math.max(maxRank, curRank);
+            }
+        }
+        return maxRank;
     }
 }
