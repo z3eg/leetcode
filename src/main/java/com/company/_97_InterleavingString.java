@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 //https://leetcode.com/problems/interleaving-string/
 public class _97_InterleavingString {
+    /*1628ms
+    Beats 5.10%of users with Java*/
     public boolean isInterleave(String s1, String s2, String s3) {
         if (s1.length()+s2.length()!=s3.length())
             return false;
@@ -16,11 +18,34 @@ public class _97_InterleavingString {
             return s2.equals(s3);
         if (s2.isEmpty())
             return s1.equals(s3);
+        char c1 = s1.charAt(0);
+        char c2 = s2.charAt(0);
+        char c3 = s3.charAt(0);
+        if (c3!=c1 && c3!=c2)
+            return false;
+        char ce1 = s1.charAt(s1.length()-1);
+        char ce2 = s2.charAt(s2.length()-1);
+        char ce3 = s3.charAt(s3.length()-1);
+        if (ce3!=ce1 && ce3!=ce2)
+            return false;
+        int[] startingFreqs = new int[26];
+        int[] endingFreqs = new int[26];
+        for (char c : s1.toCharArray()) {
+            startingFreqs[c-'a']++;
+        }
+        for (char c : s2.toCharArray()) {
+            startingFreqs[c-'a']++;
+        }
+        for (char c : s3.toCharArray()) {
+            endingFreqs[c-'a']++;
+        }
+        for (int i = 0; i < 26; i++) {
+            if (startingFreqs[i]!=endingFreqs[i])
+                return false;
+        }
         return check(s1,s2,s3,0,0,0);
     }
 
-
-//105 / 106 testcases passed
     boolean check(String s1, String s2, String s3, int l1, int l2, int l3) {
         char c1 = '#';
         char c2 = '#';
