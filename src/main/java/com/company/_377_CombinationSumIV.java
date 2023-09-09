@@ -64,6 +64,46 @@ public class _377_CombinationSumIV {
         }
     }*/
 
+    //my miserable attempt of DP on my own
+    /*public int combinationSum4(int[] nums, int target) {
+        int[][] dp = new int[target][nums.length];
+        dp[0] = nums;
+        return sum(0, 0, nums, target, dp, 0);
+    }
+
+    int sum(int res, int pos, int[] nums, int target, int[][] dp, int depth) {
+        if (dp[depth][pos] != 0) {
+            return dp[depth][pos];
+        }
+        else {
+            int curSum = res+nums[pos];
+            if (curSum == target)
+                return res+1;
+            if (curSum < target) {
+                for (int i = 0; i < nums.length; i++) {
+                    res = sum(res, i, nums, target, dp, depth+1);
+                }
+            }
+        }
+        return res;
+    }*/
+
+//naive recursion
+    /*public int combinationSum4(int[] nums, int target) {
+        return sum(0, 0, nums, target);
+    }
+
+    int sum(int res, int curSum, int[] nums, int target) {
+        if (curSum == target)
+            return res+1;
+        if (curSum < target) {
+            for (int n : nums) {
+                res = sum(res, curSum+n, nums, target);
+            }
+        }
+        return res;
+    }*/
+
     @Test
     public void test() {
         assertEquals(181997601, combinationSum4(new int[]{1,2,3},32));
