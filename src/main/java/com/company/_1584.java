@@ -241,7 +241,7 @@ public class _1584 {
     /*Runtime
     2241ms
     Beats 5.04%of users with Java*/
-    public int minCostConnectPoints(int[][] points) {
+    /*public int minCostConnectPoints(int[][] points) {
         if (points.length==1) {
             return 0;
         }
@@ -277,6 +277,183 @@ public class _1584 {
             taken.add(minD);
             available.remove(minD);
             res+=minLen;
+        }
+        return res;
+    }*/
+
+    /*Runtime
+    1689ms
+    Beats 5.04%of users with Java*/
+    /*public int minCostConnectPoints(int[][] points) {
+        if (points.length==1) {
+            return 0;
+        }
+        boolean[] taken = new boolean[points.length];
+        int[][] dists = new int[points.length][points.length];
+        taken[0] = true;
+        List<Integer> available = new ArrayList<>(points.length);
+        for (int i = 1; i < points.length; i++) {
+            available.add(i);
+        }
+        int res = 0;
+        int counter = 1;
+        while (counter < points.length) {
+            Integer minD = available.get(0);
+            int minLen = Integer.MAX_VALUE;
+            for (int t = 0; t < points.length; t++) {
+                if (taken[t]) {
+                    for (int a = 0; a < points.length; a++) {
+                        if (!taken[a]) {
+                            int curLen;
+                            if (dists[t][a]!=0)
+                                curLen = dists[t][a];
+                            else if (dists[a][t]!=0)
+                                curLen = dists[a][t];
+                            else {
+                                curLen = manDist(points[t], points[a]);
+                                dists[t][a] = curLen;
+                                dists[a][t] = curLen;
+                            }
+                            if (curLen < minLen) {
+                                minD = a;
+                                minLen = curLen;
+                            }
+                        }
+                    }
+                }
+            }
+            taken[minD]=true;
+            res+=minLen;
+            counter++;
+        }
+        return res;
+    }*/
+
+    /*Runtime
+    1290ms
+    Beats 5.04%of users with Java*/
+    /*public int minCostConnectPoints(int[][] points) {
+        if (points.length==1) {
+            return 0;
+        }
+        boolean[] taken = new boolean[points.length];
+        int[][] dists = new int[points.length][points.length];
+        taken[0] = true;
+        List<Integer> available = new ArrayList<>(points.length);
+        for (int i = 1; i < points.length; i++) {
+            available.add(i);
+        }
+        int res = 0;
+        int counter = 1;
+        while (counter < points.length) {
+            Integer minD = available.get(0);
+            int minLen = Integer.MAX_VALUE;
+            for (int t = 0; t < points.length; t++) {
+                if (taken[t]) {
+                    for (int a = 0; a < points.length; a++) {
+                        if (!taken[a]) {
+                            int curLen;
+                            if (dists[t][a]!=0)
+                                curLen = dists[t][a];
+                            else {
+                                curLen = manDist(points[t], points[a]);
+                                dists[t][a] = curLen;
+                                dists[a][t] = curLen;
+                            }
+                            if (curLen < minLen) {
+                                minD = a;
+                                minLen = curLen;
+                            }
+                        }
+                    }
+                }
+            }
+            taken[minD]=true;
+            res+=minLen;
+            counter++;
+        }
+        return res;
+    }*/
+
+    /*Runtime
+    1283 ms
+                Beats
+    5.4%
+    */
+    /*public int minCostConnectPoints(int[][] points) {
+        if (points.length==1) {
+            return 0;
+        }
+        boolean[] taken = new boolean[points.length];
+        int[][] dists = new int[points.length][points.length];
+        taken[0] = true;
+        int res = 0;
+        int counter = 1;
+        while (counter < points.length) {
+            int minD = 0;
+            int minLen = Integer.MAX_VALUE;
+            for (int t = 0; t < points.length; t++) {
+                if (taken[t]) {
+                    for (int a = 0; a < points.length; a++) {
+                        if (!taken[a]) {
+                            int curLen;
+                            if (dists[t][a]!=0)
+                                curLen = dists[t][a];
+                            else {
+                                curLen = manDist(points[t], points[a]);
+                                dists[t][a] = curLen;
+                                dists[a][t] = curLen;
+                            }
+                            if (curLen < minLen) {
+                                minD = a;
+                                minLen = curLen;
+                            }
+                        }
+                    }
+                }
+            }
+            taken[minD]=true;
+            res+=minLen;
+            counter++;
+        }
+        return res;
+    }*/
+
+    /*1260ms
+    Beats 5.04%of users with Java*/
+    public int minCostConnectPoints(int[][] points) {
+        if (points.length==1) {
+            return 0;
+        }
+        boolean[] taken = new boolean[points.length];
+        int[][] dists = new int[points.length][points.length];
+        for (int i = 0; i < points.length; i++) {
+            for (int j = 0; j < points.length; j++) {
+                dists[i][j] = manDist(points[i], points[j]);
+            }
+        }
+        taken[0] = true;
+        int res = 0;
+        int counter = 1;
+        while (counter < points.length) {
+            int minD = 0;
+            int minLen = Integer.MAX_VALUE;
+            for (int t = 0; t < points.length; t++) {
+                if (taken[t]) {
+                    for (int a = 0; a < points.length; a++) {
+                        if (!taken[a]) {
+                            int curLen = dists[t][a];
+                            if (curLen < minLen) {
+                                minD = a;
+                                minLen = curLen;
+                            }
+                        }
+                    }
+                }
+            }
+            taken[minD]=true;
+            res+=minLen;
+            counter++;
         }
         return res;
     }
