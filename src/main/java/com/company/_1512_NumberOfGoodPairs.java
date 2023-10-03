@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //https://leetcode.com/problems/number-of-good-pairs/
 public class _1512_NumberOfGoodPairs {
+    /*1ms
+    Beats 86.48%of users with Java*/
     public int numIdenticalPairs(int[] nums) {
         int res = 0;
         int length = nums.length;
