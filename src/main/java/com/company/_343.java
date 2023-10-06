@@ -8,6 +8,8 @@ import static org.junit.Assert.assertEquals;
 public class _343 {
     /*1ms
     Beats 61.46%of users with Java*/
+    /*0ms
+    Beats 100.00%of users with Java*/
     public int integerBreak(int n) {
         if (n==2)
             return 1;
@@ -19,7 +21,8 @@ public class _343 {
         dp[1] = 1;
         dp[2] = 2;
         dp[3] = 3;
-        return maxM(n, max, dp);
+        int res = maxM(n, max, dp);
+        return res;
     }
 
     int maxM(int n, int max, int[] dp) {
@@ -39,6 +42,7 @@ public class _343 {
 
     @Test
     public void test() {
+        integerBreak(58);
         assertEquals(36, integerBreak(10));
         assertEquals(1, integerBreak(2));
     }
