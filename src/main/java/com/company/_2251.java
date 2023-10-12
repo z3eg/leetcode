@@ -26,7 +26,7 @@ public class _2251 {
 
     /*773ms
     Beats 5.00%of users with Java*/
-    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+    /*public int[] fullBloomFlowers(int[][] flowers, int[] people) {
         int[] res = new int[people.length];
         int[] starts = new int[flowers.length];
         for (int i = 0; i < flowers.length; i++) {
@@ -61,6 +61,46 @@ public class _2251 {
            while (mid < arr.length && arr[mid]==n)
                mid++;
            return mid;
+        }
+        else if (n > arr[mid])
+            return bs(arr, mid, r, n);
+        else
+            return bs(arr, l, mid, n);
+    }*/
+
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+        int[] res = new int[people.length];
+        int[] starts = new int[flowers.length];
+        int[] ends = new int[flowers.length];
+        for (int i = 0; i < flowers.length; i++) {
+            starts[i] = flowers[i][0];
+            ends[i] = flowers[i][1]+1;
+        }
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+        for (int i = 0; i < people.length; i++) {
+            int started = bs(starts, 0, starts.length-1, people[i]);
+            int ended = bs(ends, 0, ends.length-1, people[i]);
+            res[i] = started - ended;
+        }
+        return res;
+    }
+
+    int bs(int[] arr, int l, int r, int n) {
+        if (r-l<=1)
+        {
+            if (n < arr[l])
+                return l;
+            else if (n < arr[r])
+                return r;
+            else if (n >= arr[r])
+                return r+1;
+        }
+        int mid = (l+r)/2;
+        if (arr[mid]==n) {
+            while (mid < arr.length && arr[mid]==n)
+                mid++;
+            return mid;
         }
         else if (n > arr[mid])
             return bs(arr, mid, r, n);
