@@ -1,7 +1,6 @@
 package com.company;
 
 import org.junit.jupiter.api.Test;
-import scala.Int;
 
 import java.util.*;
 
@@ -55,6 +54,45 @@ public class _2050 {
         }
     }*/
 
+    /*TLE 19 / 42 testcases passed. Not actually an optimisation lol*/
+    /*public int minimumTime(int n, int[][] relations, int[] time) {
+        if (n==1)
+            return time[0];
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        int[] dp = new int[n+1];
+        List<Integer> finals = new LinkedList<>();
+        for (int i = 1; i <= n; i++) {
+            boolean isFinal = true;
+            for (int[] relation : relations) {
+                Set<Integer> prevs = map.get(relation[1]);
+                if (prevs==null)
+                    prevs = new HashSet<>();
+                prevs.add(relation[0]);
+                map.put(relation[1], prevs);
+                if (relation[0] == i)
+                    isFinal = false;
+            }
+            if (isFinal)
+                finals.add(i);
+        }
+        int res = 0;
+        for (Integer finalCourse : finals) {
+            res = Math.max(res, dp(finalCourse, map, time, dp));
+        }
+        return res;
+    }
+
+    int dp(int n, Map<Integer, Set<Integer>> map, int[] time, int[]dp) {
+        if (dp[n]!=0)
+            return dp[n];
+        Set<Integer> prevs = map.get(n);
+        if (prevs!=null)
+            for (int prev : prevs)
+                dp[n] = Math.max(dp[n], dp(prev, map, time, dp));
+        dp[n]+=time[n-1];
+        return dp[n];
+    }*/
+
     /*Time Limit Exceeded
     38 / 42 testcases passed*/
     /*public int minimumTime(int n, int[][] relations, int[] time) {
@@ -94,30 +132,72 @@ public class _2050 {
         return dp[n];
     }*/
 
-    /*TLE 19 / 42 testcases passed. Not actually an optimisation lol*/
+    /*public int minimumTime(int n, int[][] relations, int[] time) {
+        if (n==1)
+            return time[0];
+        int[] dp = new int[n+1];
+        List<Integer> finals = new LinkedList<>();
+        for (int i = 1; i <= n; i++) {
+            boolean isFinalCourse = true;
+            for (int[] relation : relations) {
+                if (relation[0] == i) {
+                    isFinalCourse = false;
+                    break;
+                }
+            }
+            if (isFinalCourse)
+                finals.add(i);
+        }
+        int res = 0;
+        for (Integer finalCourse : finals) {
+            res = Math.max(res, dp(finalCourse, relations, time, dp));
+        }
+        return res;
+    }
+
+    int dp(int n, int[][] relations, int[] time, int[]dp) {
+        if (dp[n]!=0)
+            return dp[n];
+        for (int[] relation : relations) {
+            int curCourse = relation[1];
+            if (curCourse == n) {
+                int prevCourse = relation[0];
+                dp[n] = Math.max(dp[n], dp(prevCourse, relations, time, dp));
+            }
+        }
+        dp[n]+=time[n-1];
+        return dp[n];
+    }*/
+
+    /*2259ms
+    Beats 6.22%of users with Java*/
     public int minimumTime(int n, int[][] relations, int[] time) {
         if (n==1)
             return time[0];
         Map<Integer, Set<Integer>> map = new HashMap<>();
         int[] dp = new int[n+1];
-        List<Integer> finishers = new LinkedList<>();
+        List<Integer> finals = new LinkedList<>();
         for (int i = 1; i <= n; i++) {
-            boolean isFinisher = true;
+            boolean isFinal = true;
             for (int[] relation : relations) {
-                Set<Integer> prevs = map.get(relation[1]);
-                if (prevs==null)
-                    prevs = new HashSet<>();
-                prevs.add(relation[0]);
-                map.put(relation[1], prevs);
-                if (relation[0] == i)
-                    isFinisher = false;
+                if (relation[0] == i) {
+                    isFinal = false;
+                    break;
+                }
             }
-            if (isFinisher)
-                finishers.add(i);
+            if (isFinal)
+                finals.add(i);
+        }
+        for (int[] relation : relations) {
+            Set<Integer> prevs = map.get(relation[1]);
+            if (prevs==null)
+                prevs = new HashSet<>();
+            prevs.add(relation[0]);
+            map.put(relation[1], prevs);
         }
         int res = 0;
-        for (Integer finisher : finishers) {
-            res = Math.max(res, dp(finisher, map, time, dp));
+        for (Integer finalCourse : finals) {
+            res = Math.max(res, dp(finalCourse, map, time, dp));
         }
         return res;
     }
