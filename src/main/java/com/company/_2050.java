@@ -1,9 +1,9 @@
 package com.company;
 
 import org.junit.jupiter.api.Test;
+import scala.Int;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -57,15 +57,15 @@ public class _2050 {
 
     /*Time Limit Exceeded
     38 / 42 testcases passed*/
-    public int minimumTime(int n, int[][] relations, int[] time) {
+    /*public int minimumTime(int n, int[][] relations, int[] time) {
         if (n==1)
             return time[0];
         int[] dp = new int[n+1];
         List<Integer> finishers = new LinkedList<>();
         for (int i = 1; i <= n; i++) {
             boolean isFinisher = true;
-            for (int j = 0; j < relations.length; j++) {
-                if (relations[j][0] == i) {
+            for (int[] relation : relations) {
+                if (relation[0] == i) {
                     isFinisher = false;
                     break;
                 }
@@ -74,8 +74,8 @@ public class _2050 {
                 finishers.add(i);
         }
         int res = 0;
-        for (int i = 0; i < finishers.size(); i++) {
-            res = Math.max(res, dp(finishers.get(i), relations, time, dp));
+        for (Integer finisher : finishers) {
+            res = Math.max(res, dp(finisher, relations, time, dp));
         }
         return res;
     }
@@ -83,16 +83,53 @@ public class _2050 {
     int dp(int n, int[][] relations, int[] time, int[]dp) {
         if (dp[n]!=0)
             return dp[n];
-
-        for (int j = 0; j < relations.length; j++) {
-            int curCourse = relations[j][1];
+        for (int[] relation : relations) {
+            int curCourse = relation[1];
             if (curCourse == n) {
-                int prevCourse = relations[j][0];
-                dp[n] = Math.max(dp[n], time[n-1] + dp(prevCourse,relations,time,dp));
+                int prevCourse = relation[0];
+                dp[n] = Math.max(dp[n], dp(prevCourse, relations, time, dp));
             }
         }
-        if (dp[n] == 0)
-            dp[n] = time[n-1];
+        dp[n]+=time[n-1];
+        return dp[n];
+    }*/
+
+    /*TLE 19 / 42 testcases passed. Not actually an optimisation lol*/
+    public int minimumTime(int n, int[][] relations, int[] time) {
+        if (n==1)
+            return time[0];
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        int[] dp = new int[n+1];
+        List<Integer> finishers = new LinkedList<>();
+        for (int i = 1; i <= n; i++) {
+            boolean isFinisher = true;
+            for (int[] relation : relations) {
+                Set<Integer> prevs = map.get(relation[1]);
+                if (prevs==null)
+                    prevs = new HashSet<>();
+                prevs.add(relation[0]);
+                map.put(relation[1], prevs);
+                if (relation[0] == i)
+                    isFinisher = false;
+            }
+            if (isFinisher)
+                finishers.add(i);
+        }
+        int res = 0;
+        for (Integer finisher : finishers) {
+            res = Math.max(res, dp(finisher, map, time, dp));
+        }
+        return res;
+    }
+
+    int dp(int n, Map<Integer, Set<Integer>> map, int[] time, int[]dp) {
+        if (dp[n]!=0)
+            return dp[n];
+        Set<Integer> prevs = map.get(n);
+        if (prevs!=null)
+            for (int prev : prevs)
+                dp[n] = Math.max(dp[n], dp(prev, map, time, dp));
+        dp[n]+=time[n-1];
         return dp[n];
     }
 
