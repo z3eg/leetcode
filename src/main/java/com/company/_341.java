@@ -1,11 +1,11 @@
 package com.company;
 
-import scala.Int;
+import org.junit.jupiter.api.Test;
 
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 /*341. Flatten Nested List Iterator
         https://leetcode.com/problems/flatten-nested-list-iterator/description/?envType=daily-question&envId=2023-10-20*/
@@ -15,6 +15,38 @@ public class _341 {
        boolean isInteger();
        Integer getInteger();
        List<NestedInteger> getList();
+   }
+
+   public class NestedIntegerImpl implements NestedInteger {
+
+       Integer intVal;
+       List listVal;
+
+       boolean isInteger;
+
+       public NestedIntegerImpl(Integer val) {
+           this.intVal = val;
+           this.isInteger = true;
+       }
+
+       public NestedIntegerImpl(List listVal) {
+           this.listVal = listVal;
+       }
+
+       @Override
+       public boolean isInteger() {
+           return isInteger;
+       }
+
+       @Override
+       public Integer getInteger() {
+           return intVal;
+       }
+
+       @Override
+       public List<NestedInteger> getList() {
+           return listVal;
+       }
    }
 
    /* public class NestedIterator implements Iterator<Integer> {
@@ -70,7 +102,7 @@ public class _341 {
 
     /*39ms
     Beats 9.38%of users with Java*/
-    public class NestedIterator implements Iterator<Integer> {
+    /*public class NestedIterator implements Iterator<Integer> {
 
         List<Integer> list;
 
@@ -103,6 +135,138 @@ public class _341 {
                 flatten(nestedInteger, list);
             }
         }
+    }*/
+
+    /*public class NestedIterator implements Iterator<Integer> {
+
+        Stack<List> stack;
+        Stack<Integer> posStack;
+
+        int curPos;
+        List<NestedInteger> curList;
+
+        public NestedIterator(List<NestedInteger> nestedList) {
+            stack = new Stack<>();
+            posStack = new Stack<>();
+            curList = nestedList;
+            curPos = 0;
+        }
+
+        @Override
+        public Integer next() {
+            curPos++;
+            if (hasNext()) {
+                return curList.get(curPos).getInteger();
+            }
+            return null;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (curPos+1 < curList.size()) {
+                if (curList.get(curPos+1).isInteger())
+                    return true;
+                else {
+                    open(curList.get(curPos+1));
+                    if (stack.isEmpty() && curPos+1 < curList.size())
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        private void open(NestedInteger nestedList) {
+            stack.push(curList);
+            posStack.push(curPos);
+            curList = nestedList.getList();
+            curPos = 0;
+            if (curList.size() == curPos)
+                close();
+            if (!curList.get(curPos).isInteger())
+                open(curList.get(curPos));
+        }
+
+        private void close() {
+            curList = stack.pop();
+            curPos = posStack.pop();
+            curPos++;
+            if (curList.size()<=curPos)
+                close();
+        }
+    }*/
+
+    /*3ms
+    Beats 65.30%of users with Java*/
+    public class NestedIterator implements Iterator<Integer> {
+
+        Deque<List> stack;
+        Deque<Integer> posStack;
+
+        int curPos;
+        List<NestedInteger> curList;
+
+        public NestedIterator(List<NestedInteger> nestedList) {
+            stack = new LinkedList<>();
+            posStack = new LinkedList<>();
+            curList = nestedList;
+            curPos = -1;
+        }
+
+        @Override
+        public Integer next() {
+            return curList.get(curPos).getInteger();
+        }
+
+        @Override
+        public boolean hasNext() {
+            curPos++;
+            if (curPos >= curList.size()) {
+                if (!stack.isEmpty())
+                    return getOut();
+                else
+                    return false;
+            }
+            if (curList.get(curPos).isInteger())
+                return true;
+            else
+                return getIn();
+        }
+
+        boolean getIn() {
+            stack.push(curList);
+            posStack.push(curPos);
+            curList = curList.get(curPos).getList();
+            curPos = -1;
+            return hasNext();
+        }
+
+        boolean getOut() {
+            curList = stack.pop();
+            curPos = posStack.pop();
+            return hasNext();
+        }
+    }
+
+    @Test
+    public void test() {
+//        [[1,1],2,[1,1]]
+        List<NestedInteger> rootList = new LinkedList<>();
+        List<NestedInteger> il1 = new LinkedList<>();
+        il1.add(new NestedIntegerImpl(1));
+        il1.add(new NestedIntegerImpl(1));
+        NestedInteger nil1 = new NestedIntegerImpl(il1);
+        rootList.add(nil1);
+        rootList.add(new NestedIntegerImpl(2));
+        List<NestedInteger> il2 = new LinkedList<>();
+        il2.add(new NestedIntegerImpl(1));
+        il2.add(new NestedIntegerImpl(1));
+        NestedInteger nil2 = new NestedIntegerImpl(il1);
+        rootList.add(nil2);
+        NestedIterator iter = new NestedIterator(rootList);
+        while (iter.hasNext())
+            System.out.println(iter.next());
     }
 
 }
