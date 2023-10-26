@@ -6,7 +6,7 @@ public class _100 {
 
     /*1ms
     Beats 100.00%of users with Java*/
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    /*public boolean isSameTree(TreeNode p, TreeNode q) {
         return isSame(p,q) && isSame(q,p);
     }
 
@@ -30,6 +30,20 @@ public class _100 {
             rightMatches = isSameTree(p.right, q.right);
         }
         return leftMatches && rightMatches;
+    }*/
+
+    /*0ms
+    Beats 100.00%of users with Java*/
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p==null && q!=null)
+            return false;
+        if (p!=null && q==null)
+            return false;
+        if (p==null && q==null)
+            return true;
+        if (p.val!=q.val)
+            return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
 }
