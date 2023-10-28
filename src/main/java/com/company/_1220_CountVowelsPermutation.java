@@ -53,7 +53,8 @@ public class _1220_CountVowelsPermutation {
         }
     }*/
 
-    public int countVowelPermutation(int n) {
+    //TLE 5 / 43 testcases passed
+    /*public int countVowelPermutation(int n) {
         int res = 0;
         res+=add(0, 0, n, 'a');
         res+=add(0, 0, n, 'e');
@@ -92,7 +93,7 @@ public class _1220_CountVowelsPermutation {
             }
         }
         return curAmount;
-    }
+    }*/
 
     /*Each character is a lower case vowel ('a', 'e', 'i', 'o', 'u')
     Each vowel 'a' may only be followed by an 'e'.
@@ -101,21 +102,47 @@ public class _1220_CountVowelsPermutation {
     Each vowel 'o' may only be followed by an 'i' or a 'u'.
     Each vowel 'u' may only be followed by an 'a'.*/
 
+    /*19ms
+    Beats 42.57%of users with Java*/
+    public int countVowelPermutation(int n) {
+        long[][] dp = new long[n+1][5];
+        for (int i = 0; i < 5; i++) {
+            dp[1][i] = 1;
+        }
+        long res = 0L;
+        for (int i = 0; i < 5; i++) {
+            res+=dp(n, i, dp);
+        }
+        return (int) (res%1_000_000_007);
+    }
+
+     int[] idx(int c) {
+        return switch(c) {
+            case 0 -> new int[]{1}; //a->e
+            case 1 -> new int[]{0,2}; //e->a,i
+            case 2 -> new int[]{0,1,3,4}; //i->a,e,o,u
+            case 3 -> new int[]{2,4}; //o->i,u
+            case 4 -> new int[]{0};
+            default -> null;
+        };
+    }
+
+    long dp(int length, int c, long[][] dp) {
+        if (dp[length][c]!=0)
+            return dp[length][c];
+        int[] followers = idx(c);
+        long curDP = 0;
+        for (int f : followers)
+            curDP +=dp(length-1,f,dp);
+        dp[length][c] = curDP;
+        return curDP % 1_000_000_007;
+    }
+
     @Test
     public void test() {
+        assertEquals(18208803, countVowelPermutation(144));
         assertEquals(10, countVowelPermutation(2));
         assertEquals(5, countVowelPermutation(1));
     }
-
-    /*Example 1:
-
-    Input: n = 1
-    Output: 5
-    Explanation: All possible strings are: "a", "e", "i" , "o" and "u".
-    Example 2:
-
-    Input: n = 2
-    Output: 10
-    Explanation: All possible strings are: "ae", "ea", "ei", "ia", "ie", "io", "iu", "oi", "ou" and "ua".*/
 
 }
