@@ -2,6 +2,7 @@ package com.company;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class _1356 {
 
     /*292ms
     Beats 5.09%of users with Java*/
-    Map<Integer, Integer> map = new HashMap<>();
+    /*Map<Integer, Integer> map = new HashMap<>();
 
     public int[] sortByBits(int[] arr) {
         boolean sorted = false;
@@ -83,6 +84,21 @@ public class _1356 {
         assertEquals(2, getBits(6));
         assertEquals(3, getBits(7));
     }
+*/
+
+    /*3ms
+    Beats 99.13%of users with Java*/
+    public int[] sortByBits(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]+=Integer.bitCount(arr[i])*10001;
+        }
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]%=10001;;
+        }
+        return arr;
+    }
+
 
     @Test
     public void test() {
