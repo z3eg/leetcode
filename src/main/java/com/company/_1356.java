@@ -2,13 +2,16 @@ package com.company;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class _1356 {
     /*892ms
     Beats 5.09%of users with Java*/
-    public int[] sortByBits(int[] arr) {
+    /*public int[] sortByBits(int[] arr) {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
@@ -30,6 +33,41 @@ public class _1356 {
             count+=n%2;
             n/=2;
         }
+        return count;
+    }*/
+
+
+    /*292ms
+    Beats 5.09%of users with Java*/
+    Map<Integer, Integer> map = new HashMap<>();
+
+    public int[] sortByBits(int[] arr) {
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (getBits(arr[i]) > getBits(arr[i+1]) || (getBits(arr[i]) == getBits(arr[i+1]) && (arr[i]>arr[i+1]))) {
+                    sorted = false;
+                    int tmp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = tmp;
+                }
+            }
+        }
+        return arr;
+    }
+
+    public int getBits(int n) {
+        Integer val = map.get(n);
+        int key = n;
+        if (val !=null)
+            return val;
+        int count = 0;
+        while (n>=1) {
+            count+=n%2;
+            n/=2;
+        }
+        map.put(key, count);
         return count;
     }
 
