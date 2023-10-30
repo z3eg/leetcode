@@ -1,11 +1,12 @@
 package com.company;
 
+import com.company.util.tree.bst.TreeNode;
 import org.junit.Test;
 
 //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
 public class _108_ConvertSortedArrayToBinarySearchTree {
 
-    private class TreeNode {
+    /*private class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -49,10 +50,11 @@ public class _108_ConvertSortedArrayToBinarySearchTree {
             }
         }
         return root;
-    }
+    }*/
+
 
     @Test
     public void test() {
-        sortedArrayToBST(new int[]{-10,-3,0,5,9});
+//        sortedArrayToBST(new int[]{-10,-3,0,5,9});
     }
 }
