@@ -109,7 +109,7 @@ public class _1503 {
 
     /*1280ms
     Beats 16.48%of users with Java*/
-    public int getLastMoment(int n, int[] left, int[] right) {
+    /*public int getLastMoment(int n, int[] left, int[] right) {
         int[][] ants = new int[left.length+right.length][3]; //0-pos //1-direction //2-fallen
         for (int i = 0; i < left.length; i++) {
             ants[i][0] = left[i];
@@ -144,9 +144,33 @@ public class _1503 {
             }
         }
         return time;
+    }*/
+
+
+    /*1101ms
+    Beats 16.48%of users with Java*/
+    public int getLastMoment(int n, int[] left, int[] right) {
+        int fallenAnts = 0;
+        int time = -1;
+        while (fallenAnts<left.length+right.length) {
+            time++;
+            for (int i = 0; i < left.length; i++) {
+                if (left[i]>=0) {
+                    left[i]--;
+                    if (left[i]<0)
+                        fallenAnts++;
+                }
+            }
+            for (int i = 0; i < right.length; i++) {
+                if (right[i]<n+1) {
+                    right[i]++;
+                    if (right[i]==n+1)
+                        fallenAnts++;
+                }
+            }
+        }
+        return time;
     }
-
-
 
 
 
