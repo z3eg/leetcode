@@ -149,7 +149,7 @@ public class _1503 {
 
     /*1101ms
     Beats 16.48%of users with Java*/
-    public int getLastMoment(int n, int[] left, int[] right) {
+    /*public int getLastMoment(int n, int[] left, int[] right) {
         int fallenAnts = 0;
         int time = -1;
         while (fallenAnts<left.length+right.length) {
@@ -170,6 +170,20 @@ public class _1503 {
             }
         }
         return time;
+    }*/
+
+    /*0ms
+    Beats 100.00%of users with Java*/
+    public int getLastMoment(int n, int[] left, int[] right) {
+        int lmax = 0;
+        for (int l : left) {
+            lmax = Math.max(lmax, l);
+        }
+        int rmax = 0;
+        for (int r : right) {
+            rmax = Math.max(rmax, (n - r));
+        }
+        return Math.max(lmax, rmax);
     }
 
 
