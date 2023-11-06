@@ -19,8 +19,8 @@ public class _1535 {
             if (j > max)
                 max = j;
         }
-        /*if (k>max)
-            return max;*/
+        if (k>=max)
+            return max;
         int winCount = 0;
         while (winCount < k && array.get(0)!=max) {
             if (array.get(0) > array.get(1)) {
