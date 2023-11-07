@@ -10,7 +10,7 @@ public class _1921 {
 
     /*22ms
     Beats 41.15%of users with Java*/
-    public int eliminateMaximum(int[] dist, int[] speed) {
+    /*public int eliminateMaximum(int[] dist, int[] speed) {
         int n = dist.length;
         double[] times = new double[n];
         for (int i = 0; i < n; i++) {
@@ -22,6 +22,22 @@ public class _1921 {
             if (times[i] - timePassed <= 0)
                 return i;
             timePassed++;
+        }
+        return n;
+    }*/
+
+    /*21ms
+    Beats 57.81%of users with Java*/
+    public int eliminateMaximum(int[] dist, int[] speed) {
+        int n = dist.length;
+        double[] times = new double[n];
+        for (int i = 0; i < n; i++) {
+            times[i] = (double) dist[i] /speed[i];
+        }
+        Arrays.sort(times);
+        for (int i = 0; i < times.length; i++) {
+            if (times[i] - i <= 0)
+                return i;
         }
         return n;
     }
