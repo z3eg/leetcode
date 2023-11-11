@@ -7,14 +7,20 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 public class _2642 {
-//    2 / 36 testcases passed
+   /* Time Limit Exceeded
+33 / 36 testcases passed*/
     class Graph {
 
         int[][] adjMat;
         int[][] closestMatrix;
         Map<Integer, List<Integer>> map;
 
+        int edgesAdded;
+        int[][] calculatedOnEdgesAdded;
+
         public Graph(int n, int[][] edges) {
+            edgesAdded = 0;
+            calculatedOnEdgesAdded = new int[n][n];
             adjMat = new int[n][n];
             closestMatrix = new int[n][n];
             map = new HashMap<>();
@@ -37,6 +43,7 @@ public class _2642 {
             }
             list.add(edge[1]);
             map.put(edge[0], list);
+            edgesAdded++;
         }
 
         private List<Integer> adjNodes(int node) {
@@ -44,13 +51,19 @@ public class _2642 {
         }
 
         public int shortestPath(int node1, int node2) {
+            if (node1==node2)
+                return 0;
+            if (calculatedOnEdgesAdded[node1][node2] == edgesAdded && closestMatrix[node1][node2]!=0 && closestMatrix[node1][node2]!=-1)
+                return closestMatrix[node1][node2];
             //dijkstra here?
             int minDist = Integer.MAX_VALUE;
             Map<Integer, Integer> visitedNodes = new HashMap<>();
             Queue<int[]> nodesToVisit = new LinkedList<>();
             List<Integer> adjNodes = adjNodes(node1);
-            for (Integer node : adjNodes) {
-                nodesToVisit.add(new int[]{node,adjMat[node1][node]});
+            if (adjNodes!=null) {
+                for (Integer node : adjNodes) {
+                    nodesToVisit.add(new int[]{node,adjMat[node1][node]});
+                }
             }
             visitedNodes.put(node1, 0);
             while (!nodesToVisit.isEmpty()) {
@@ -73,7 +86,10 @@ public class _2642 {
                 }
                 visitedNodes.put(curNode[0], curNode[1]);
             }
-            return minDist==Integer.MAX_VALUE?-1:minDist;
+            int res = (minDist == Integer.MAX_VALUE ? -1 : minDist);
+            closestMatrix[node1][node2] = res;
+            calculatedOnEdgesAdded[node1][node2] = edgesAdded;
+            return res;
         }
     }
 
