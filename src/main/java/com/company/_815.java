@@ -87,19 +87,16 @@ public class _815 {
     }*/
 
     public int numBusesToDestination(int[][] routes, int source, int target) {
-        if (source==target)
+        if (source==target) {
             return 0;
+        }
+        short[] freqs = new short[1_000_000];
         List<Integer> sourceRoutes = new LinkedList<>();
         List<Integer> targetRoutes = new LinkedList<>();
-
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int i = 0; i < routes.length; i++) {
             for (int j = 0; j < routes[i].length; j++) {
-                List<Integer> list = map.get(routes[i][j]);
-                if (list==null)
-                    list = new LinkedList<>();
-                list.add(i);
-                map.put(routes[i][j], list);
+                freqs[routes[i][j]]++;
                 if (routes[i][j] == source) {
                     sourceRoutes.add(i);
                 }
@@ -108,31 +105,59 @@ public class _815 {
                 }
             }
         }
+        Set<Integer> dupes = new HashSet<>();
+        for (int i = 0; i < freqs.length; i++) {
+            if (freqs[i]>1)
+                dupes.add(i);
+        }
+        //bs each route to find if dupe is there
         boolean[][] adjMat = new boolean[routes.length][routes.length];
-        map.forEach((k,v)->{
-            if (v.size()>1) {
-                for (int i = 0; i < v.size(); i++) {
-                    for (int j = 0; j < v.size(); j++) {
-                        if (i!=j) {
-                            adjMat[v.get(i)][v.get(j)] = true;
-                            adjMat[v.get(j)][v.get(i)] = true;
-                        }
+        for (Integer dupe : dupes) {
+            List<Integer> dupeRoutes = new LinkedList<>();
+            for (int i = 0; i < routes.length; i++) {
+                int[] route = routes[i];
+                if (bs(route, dupe, 0, route.length)!=-1) {
+                    dupeRoutes.add(i);
+                }
+            }
+            for (int i = 0; i < dupeRoutes.size(); i++) {
+                for (int j = 0; j < dupeRoutes.size(); j++) {
+                    if (i!=j) {
+                        adjMat[dupeRoutes.get(i)][dupeRoutes.get(j)] = true;
+                        adjMat[dupeRoutes.get(j)][dupeRoutes.get(i)] = true;
                     }
                 }
             }
-        });
-        int minDist = Integer.MAX_VALUE;
-        //min of dijkstra for each pair of source+target routes
+        }
         for (Integer curSourceRoot : sourceRoutes) {
             for (Integer curTarRoot : targetRoutes) {
                 if (curSourceRoot == curTarRoot)
                     return 1;
-                else {
-                    minDist = Math.min(minDist, dijkstra(adjMat, curSourceRoot, curTarRoot));
-                }
+            }
+        }
+        int minDist = Integer.MAX_VALUE;
+
+        //min of dijkstra for each pair of source+target routes
+        for (Integer curSourceRoot : sourceRoutes) {
+            for (Integer curTarRoot : targetRoutes) {
+                minDist =  Math.min(minDist, dijkstra(adjMat, curSourceRoot, curTarRoot));
             }
         }
         return minDist==Integer.MAX_VALUE?-1:minDist;
+    }
+
+    private int bs(int[] route, int k, int l, int r) {
+        if (r-l <= 1)
+            return -1;
+        int mid = (r+l)/2;
+        if (route[mid]==k)
+            return mid;
+        if (k < route[mid]) {
+            return bs(route, k, l, mid);
+        }
+        else {
+            return bs(route, k, mid, r);
+        }
     }
 
     private int dijkstra(boolean[][] connected, int sourceRoute, int tarRoute) {
