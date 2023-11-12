@@ -190,7 +190,7 @@ public class _815 {
 
 
     //    47 / 49 testcases passed
-    public int numBusesToDestination(int[][] routes, int source, int target) {
+    /*public int numBusesToDestination(int[][] routes, int source, int target) {
         if (source==target) {
             return 0;
         }
@@ -258,7 +258,7 @@ public class _815 {
         }
     }
 
-    //expand from each starting node simultaniously and look for all the targets at the same time
+    //expand from each starting node simultaneously and look for all the targets at the same time
     private int dijkstra(boolean[][] connected, List<Integer> sourceRoutes, List<Integer> tarRoutes) {
         boolean[] visited = new boolean[connected.length];
         Queue<int[]> q = new LinkedList<>();
@@ -288,12 +288,122 @@ public class _815 {
             }
         }
         return Integer.MAX_VALUE;
+    }*/
+
+    /*Wrong Answer
+    46 / 49 testcases passed*/
+    public int numBusesToDestination(int[][] routes, int source, int target) {
+        if (source==target) {
+            return 0;
+        }
+        Set<Integer> sourceRoutes = new HashSet<>();
+        Set<Integer> targetRoutes = new HashSet<>();
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+
+        Arrays.sort(routes, Comparator.comparing(subArr -> subArr.length));
+
+        for (int i = 0; i < routes.length; i++) {
+            for (int j = 0; j < routes[i].length; j++) {
+                int stopToFind = routes[i][j];
+                if (stopToFind == source) {
+                    sourceRoutes.add(i);
+                }
+                if (stopToFind == target) {
+                    targetRoutes.add(i);
+                }
+                for (int k = i+1; k < routes.length; k++) {
+                    if (bs(routes[k], stopToFind, 0, routes[k].length) != -1) {
+
+                        if (stopToFind == source) {
+                            sourceRoutes.add(k);
+                        }
+                        if (stopToFind == target) {
+                            targetRoutes.add(k);
+                        }
+
+                        //add k-th route to i-connected routes
+                        Set<Integer> routesConnectedToThisRoute = map.get(i);
+                        if (routesConnectedToThisRoute==null) {
+                            routesConnectedToThisRoute = new HashSet<>();
+                        }
+                        routesConnectedToThisRoute.add(k);
+                        map.put(i, routesConnectedToThisRoute);
+
+                        //add i-th route to k-connected routes
+                        Set<Integer> routesConnectedToThatRoute = map.get(k);
+                        if (routesConnectedToThatRoute==null) {
+                            routesConnectedToThatRoute = new HashSet<>();
+                        }
+                        routesConnectedToThatRoute.add(i);
+                        map.put(k, routesConnectedToThatRoute);
+                    }
+                }
+            }
+        }
+
+        for (Integer curSourceRoot : sourceRoutes) {
+            for (Integer curTarRoot : targetRoutes) {
+                if (curSourceRoot == curTarRoot)
+                    return 1;
+            }
+        }
+        int minDist = Integer.MAX_VALUE;
+        minDist =  Math.min(minDist, dijkstra(map, sourceRoutes, targetRoutes));
+        return minDist==Integer.MAX_VALUE?-1:minDist;
+    }
+
+    private int bs(int[] route, int k, int l, int r) {
+        if (r-l <= 1)
+            return (route[l]==k?l:-1);
+        int mid = (r+l)/2;
+        if (route[mid]==k)
+            return mid;
+        if (k < route[mid]) {
+            return bs(route, k, l, mid);
+        }
+        else {
+            return bs(route, k, mid, r);
+        }
+    }
+
+    //expand from each starting node simultaneously and look for all the targets at the same time
+    private int dijkstra(Map<Integer, Set<Integer>> map, Set<Integer> sourceRoutes, Set<Integer> tarRoutes) {
+        boolean[] visited = new boolean[500];
+        Queue<int[]> q = new LinkedList<>();
+        Iterator<Integer> it = sourceRoutes.iterator();
+        int counter = 0;
+        while (it.hasNext()) {
+            int r = it.next();
+            Set<Integer> connectedRoutes = map.get(r);
+            if (connectedRoutes!=null)
+                connectedRoutes.forEach(cr -> q.add(new int[]{cr,2}));
+            visited[counter] = true;
+            counter++;
+        }
+        while (!q.isEmpty()) {
+            int[] curRoute = q.poll();
+            int curRouteNum = curRoute[0];
+            int curLen = curRoute[1];
+            for (Integer tarRoute : tarRoutes) {
+                if (curRouteNum == tarRoute) {
+                    return curLen;
+                } else {
+                    for (int i = 0; i < visited.length; i++) {
+                        if (!visited[i] && map.get(curRouteNum).contains(i)) {
+                            q.add(new int[]{i,curLen+1});
+                        }
+                    }
+                    visited[curRouteNum] = true;
+                }
+            }
+        }
+        return Integer.MAX_VALUE;
     }
 
     @Test
     public void test() {
-        assertEquals(-1, numBusesToDestination(new int[][]{{7,12},{4,5,15},{6},{15,19},{9,12,13}}, 15, 12));
         assertEquals(2, numBusesToDestination(new int[][]{{1,2,7},{3,6,7}}, 1, 6));
+        assertEquals(-1, numBusesToDestination(new int[][]{{7,12},{4,5,15},{6},{15,19},{9,12,13}}, 15, 12));
     }
 
     @Test
