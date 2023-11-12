@@ -71,6 +71,11 @@ public class _2642 {
                 if (curNode[0] == node2) {
                     minDist = Math.min(minDist, curNode[1]);
                 }
+                else if (calculatedOnEdgesAdded[curNode[0]][node2] == edgesAdded
+                        && closestMatrix[curNode[0]][node2]!=0
+                        && closestMatrix[curNode[0]][node2]!=-1) {
+                    minDist = Math.min(minDist, curNode[1] + closestMatrix[curNode[0]][node2]);
+                }
                 else {
                     adjNodes = adjNodes(curNode[0]);
                     if (adjNodes != null) {
