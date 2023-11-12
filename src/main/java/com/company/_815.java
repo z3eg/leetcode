@@ -86,6 +86,7 @@ public class _815 {
         return Integer.MAX_VALUE;
     }*/
 
+    //47 / 49 TLE
     public int numBusesToDestination(int[][] routes, int source, int target) {
         if (source==target) {
             return 0;
@@ -148,7 +149,7 @@ public class _815 {
 
     private int bs(int[] route, int k, int l, int r) {
         if (r-l <= 1)
-            return -1;
+            return (route[l]==k?l:-1);
         int mid = (r+l)/2;
         if (route[mid]==k)
             return mid;
@@ -186,6 +187,25 @@ public class _815 {
         }
         return Integer.MAX_VALUE;
     }
+
+    @Test
+    public void testBS() {
+        assertEquals(1, bs(new int[]{1,2,3,4,5}, 2, 0, 5));
+        assertEquals(-1, bs(new int[]{1,2,3,4,5}, 0, 0, 5));
+        assertEquals(-1, bs(new int[]{1,2,3,4,5}, 7, 0, 5));
+        assertEquals(-1, bs(new int[]{1,2,3,5,6}, 4, 0, 5));
+        assertEquals(-1, bs(new int[]{1}, 4, 0, 1));
+        assertEquals(0, bs(new int[]{1}, 1, 0, 1));
+        assertEquals(-1, bs(new int[]{1}, 0, 0, 1));
+        assertEquals(0, bs(new int[]{1,2}, 1, 0, 2));
+        assertEquals(-1, bs(new int[]{1,5}, 2, 0, 2));
+        assertEquals(-1, bs(new int[]{1,5}, 3, 0, 2));
+        assertEquals(-1, bs(new int[]{1,5}, 4, 0, 2));
+        assertEquals(0, bs(new int[]{1,2,3}, 1, 0, 3));
+        assertEquals(2, bs(new int[]{1,2,3}, 3, 0, 3));
+        assertEquals(1, bs(new int[]{1,2,3}, 2, 0, 3));
+    }
+
 
     @Test
     public void test() {
