@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class _1930 {
     /*Time Limit Exceeded
 43 / 70 testcases passed*/
-    public int countPalindromicSubsequence(String s) {
+    /*public int countPalindromicSubsequence(String s) {
         int[] freqs = new int[26];
         char[] chars = s.toCharArray();
         int max = 1;
@@ -40,6 +40,38 @@ public class _1930 {
             }
         }
         return res.size();
+    }*/
+
+    /*13ms
+    Beats 99.02%of users with Java*/
+    public int countPalindromicSubsequence(String s) {
+        int[][] lr = new int[26][2];
+        for (int i = 0; i < 26; i++) {
+            lr[i][0] = s.indexOf('a'+i);
+            lr[i][1] = s.lastIndexOf('a'+i);
+        }
+        int res = 0;
+        for (int i = 0; i < 26; i++) {
+            res+=countUniqueSymbols(lr[i], s);
+        }
+        return res;
+    }
+
+    int countUniqueSymbols(int[] lr, String s) {
+        if (lr[0]==-1 || lr[1] == -1 || lr[0]==lr[1])
+            return 0;
+        boolean[] found = new boolean[26];
+        int count = 0;
+        for (int i = lr[0]+1; i < lr[1]; i++) {
+            char c = s.charAt(i);
+            if (!found[c-'a']) {
+                found[c-'a'] = true;
+                count++;
+                if (count==26)
+                    return 26;
+            }
+        }
+        return count;
     }
 
     @Test
