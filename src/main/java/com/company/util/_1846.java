@@ -18,12 +18,24 @@ public class _1846 {
 
 
 //18 / 49 testcases passed TLE
-    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+    /*public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
         Arrays.sort(arr);
         arr[0] = 1;
         for (int i = 1; i < arr.length; i++) {
             while (arr[i] - arr[i-1] > 1)
                 arr[i]--;
+        }
+        return arr[arr.length-1];
+    }*/
+
+//    6ms
+//    Beats 82.14%of users with Java
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        Arrays.sort(arr);
+        arr[0]=1;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i]>arr[i-1])
+                arr[i] = arr[i-1]+1;
         }
         return arr[arr.length-1];
     }
