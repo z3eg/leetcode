@@ -2,6 +2,8 @@ package com.company.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class _1846 {
@@ -14,12 +16,16 @@ public class _1846 {
         return Math.min(max, arr.length);
     }*/
 
+
+//18 / 49 testcases passed TLE
     public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
-        int max = 0;
-        for (int a : arr) {
-            max = Math.max(a, max);
+        Arrays.sort(arr);
+        arr[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            while (arr[i] - arr[i-1] > 1)
+                arr[i]--;
         }
-        return Math.min(max, arr.length);
+        return arr[arr.length-1];
     }
 
     @Test
