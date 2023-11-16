@@ -6,7 +6,30 @@ import static org.junit.Assert.assertTrue;
 
 public class _1980 {
 //    174 / 183 testcases passed
+    /*public String findDifferentBinaryString(String[] nums) {
+        int n = nums.length;
+        int[] freqs = new int[n];
+        for (String s : nums) {
+            for (int i = 0; i < n; i++) {
+                if (s.charAt(i)=='1')
+                    freqs[i]++;
+            }
+        }
+        String res = "";
+        for (int i = 0; i < n; i++) {
+            res+=(freqs[i]>=n/2?"0":"1");
+        }
+        return res;
+    }*/
+
+//    175 / 183 testcases passed
     public String findDifferentBinaryString(String[] nums) {
+        if (nums.length==1) {
+            if (nums[0].equals("0"))
+                return "1";
+            else
+                return "0";
+        }
         int n = nums.length;
         int[] freqs = new int[n];
         for (String s : nums) {
