@@ -2,6 +2,8 @@ package com.company;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,7 +52,7 @@ public class _1980 {
 
     /*Time Limit Exceeded
 180 / 183 testcases passed (on 5 strings??)*/
-    public String findDifferentBinaryString(String[] nums) {
+    /*public String findDifferentBinaryString(String[] nums) {
         int n = nums.length;
         int[] freqs = new int[n];
         Set<String> set = new HashSet<>();
@@ -93,6 +95,29 @@ public class _1980 {
             res = new String(sChArr);
         }
         return res;
+    }*/
+
+    /*1ms
+    Beats 77.09%of users with Java*/
+    public String findDifferentBinaryString(String[] nums) {
+        int counter = 1;
+        int n = nums.length;
+        Set<String> set = new HashSet<>();
+        Collections.addAll(set, nums);
+        char[] str = new char[n];
+        Arrays.fill(str,'0');
+        while (set.contains(new String(str))) {
+            flip(str, counter);
+            counter++;
+        }
+        return new String(str);
+    }
+
+    private void flip(char[] str, int counter) {
+        for (int i = 0; i < str.length; i++) {
+            if (counter % Math.pow(2,i) == 0)
+                str[i] = str[i] == '0'?'1':'0';
+        }
     }
 
     @Test
