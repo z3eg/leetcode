@@ -8,17 +8,18 @@ import static org.junit.Assert.assertEquals;
 
 public class _1838 {
     /*103 ms
-    Beats 5.14% of users with Java*/
+    Beats 5.14% of users with Java
+
+    */
     public int maxFrequency(int[] nums, int k) {
         Arrays.sort(nums);
         int maxCount = 1;
         for (int i = nums.length-1; i >= 0; i--) {
             if (i==nums.length-1 || (i<nums.length-1 && nums[i]!=nums[i+1])) {
                 int count = 1;
-                int p = nums[i];
                 int tmpK = k;
                 for (int j = i-1; j >= 0; j--) {
-                    int curDiff = p - nums[j];
+                    int curDiff = nums[i] - nums[j];
                     if (curDiff > tmpK) {
                         maxCount = Math.max(maxCount, count);
                         break;
