@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class _1814 {
     /*Time Limit Exceeded
 65 / 84 testcases passed*/
-    public int countNicePairs(int[] nums) {
+    /*public int countNicePairs(int[] nums) {
         int mod = 1_000_000_007;
         if (nums.length==1)
             return 0;
@@ -21,6 +21,37 @@ public class _1814 {
             for (int j = 0; j < nums.length; j++) {
                 if (i!=j && (revs[i] + nums[j] == revs[j] + nums[i])) { //order is important for not overflowing
                     res++; //TODO see if there are duplicates
+                }
+            }
+        }
+        return (int) (res/2)%mod;
+    }
+
+    private long rev(int num) {
+        long res = 0;
+        while (num>=1) {
+            res*=10;
+            res+=num%10;
+            num/=10;
+        }
+        return res;
+    }*/
+
+    /*Time Limit Exceeded
+    65 / 84 testcases passed
+    */
+    public int countNicePairs(int[] nums) {
+        int mod = 1_000_000_007;
+        if (nums.length==1)
+            return 0;
+        for (int i = 0; i < nums.length; i++) {
+             nums[i] -= rev(nums[i]);
+        }
+        long res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (i!=j && (nums[i] == nums[j])) {
+                    res++;
                 }
             }
         }
