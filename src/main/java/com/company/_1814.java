@@ -109,7 +109,7 @@ public class _1814 {
 
     /*Wrong Answer
 82 / 84 testcases passed*/
-    public int countNicePairs(int[] nums) {
+    /*public int countNicePairs(int[] nums) {
         int mod = 1_000_000_007;
         if (nums.length==1)
             return 0;
@@ -131,6 +131,45 @@ public class _1814 {
         }
 
         return (int) res;
+    }
+
+    private long rev(int num) {
+        long res = 0;
+        while (num>=1) {
+            res*=10;
+            res+=num%10;
+            num/=10;
+        }
+        return res;
+    }*/
+
+    /*25
+    ms
+    Beats
+    97.64%
+    of users with Java*/
+    public int countNicePairs(int[] nums) {
+        int mod = 1_000_000_007;
+        if (nums.length==1)
+            return 0;
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] -= rev(nums[i]);
+        }
+        long res = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums) {
+            Integer val = map.get(n);
+            if (val==null)
+                val = 0;
+            val++;
+            map.put(n, val);
+        }
+        for (Integer value : map.values()) {
+            if (value > 1)
+                res+=(((long) value *(value-1))/2)%mod;
+        }
+
+        return (int) res%mod;
     }
 
     private long rev(int num) {
