@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class _1424 {
 
@@ -66,8 +63,40 @@ public class _1424 {
 
         /*Wrong Answer
     55 / 56 testcases passed*/
-    public int[] findDiagonalOrder(List<List<Integer>> nums) {
+    /*public int[] findDiagonalOrder(List<List<Integer>> nums) {
         Map<Integer, List<Integer>> map = new HashMap<>();
+        int arrLen = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            List<Integer> list = nums.get(i);
+            arrLen+= list.size();
+            for (int j = 0; j < list.size(); j++) {
+                List<Integer> val = map.get(i + j);
+                if (val==null) {
+                    val = new LinkedList<>();
+                }
+                val.add(list.get(j));
+                map.put(i+j, val);
+            }
+        }
+        int[] arr = new int[arrLen];
+        int index = 0;
+        for (Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
+            List<Integer> value = entry.getValue();
+            for (int i = value.size()-1; i >= 0; i--) {
+                arr[index] = value.get(i);
+                index++;
+            }
+        }
+        return arr;
+    }*/
+
+    /*80
+    ms
+            Beats
+10.70%
+    of users with Java*/
+    public int[] findDiagonalOrder(List<List<Integer>> nums) {
+        Map<Integer, List<Integer>> map = new TreeMap<>();
         int arrLen = 0;
         for (int i = 0; i < nums.size(); i++) {
             List<Integer> list = nums.get(i);
