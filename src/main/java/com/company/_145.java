@@ -15,10 +15,23 @@ public class _145 {
 
     /*Wrong Answer
 33 / 68 testcases passed*/
-    void traverse(TreeNode root, List<Integer> res) {
+    /*void traverse(TreeNode root, List<Integer> res) {
         if (root!=null) {
             traverse(root.right, res);
             traverse(root.left, res);
+            res.add(root.val);
+        }
+    }*/
+
+    /*0
+    ms
+    Beats
+    100.00%
+    of users with Java*/
+    void traverse(TreeNode root, List<Integer> res) {
+        if (root!=null) {
+            traverse(root.left, res);
+            traverse(root.right, res);
             res.add(root.val);
         }
     }
