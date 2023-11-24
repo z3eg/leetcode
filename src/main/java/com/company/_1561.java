@@ -16,6 +16,12 @@ public class _1561 {
         Beats
         98.17%
     */
+
+    /*27
+    ms
+    Beats
+    98.94%
+    of users with Java*/
     public int maxCoins(int[] piles) {
         Arrays.sort(piles);
         int l = 0;
