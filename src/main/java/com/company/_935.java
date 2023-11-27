@@ -2,13 +2,20 @@ package com.company;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class _935 {
+
+    public static int MOD = 1_000_000_007;
     public int knightDialer(int n) {
         int res = 0;
+        int[][] dp = new int[n+1][10];
+        Arrays.fill(dp[1],1);
         for (int i = 0; i < 10; i++) {
-            res+=transitions(n-1, i, 0);
+            res = (res+ transitions(n, i, dp)) % MOD;
+//            res%=MOD;
         }
         return res;
     }
@@ -43,7 +50,7 @@ public class _935 {
     }*/
 
     //naive recursion optimized for DP
-    private int transitions(int n, int lastDigit, int curRes) {
+    /*private int transitions(int n, int lastDigit, int curRes) {
         if (0 == n)
             return curRes+1;
         int[] nextDigits = transitionsFrom(lastDigit);
@@ -51,14 +58,27 @@ public class _935 {
             curRes = transitions(n-1,  nd, curRes);
         }
         return curRes;
+    }*/
+
+    /*45
+    ms
+            Beats
+47.93%
+    of users with Java*/
+    private int transitions(int n, int lastDigit, int[][]dp) {
+        if (dp[n][lastDigit]!=0)
+            return dp[n][lastDigit];
+        int[] nextDigits = transitionsFrom(lastDigit);
+        for (int nd : nextDigits) {
+            dp[n][lastDigit] = (dp[n][lastDigit] + transitions(n-1, nd, dp)) % MOD;
+        }
+        return dp[n][lastDigit];
     }
-
-
 
     @Test
     public void test() {
         assertEquals(20, knightDialer(2));
+        assertEquals(136006598, knightDialer(3131));
         assertEquals(10, knightDialer(1));
-//        assertEquals(136006598, knightDialer(3131));
     }
 }
