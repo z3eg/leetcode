@@ -10,17 +10,32 @@ public class _935 {
 
     public static int MOD = 1_000_000_007;
     public int knightDialer(int n) {
+        int[][] transitionsFrom = new int[][]{{4,6},{6,8},{7,9},{4,8},{3,9,0},{},{1,7,0},{2,6},{1,3},{4,2}};
         int res = 0;
         int[][] dp = new int[n+1][10];
         Arrays.fill(dp[1],1);
         for (int i = 0; i < 10; i++) {
-            res = (res+ transitions(n, i, dp)) % MOD;
-//            res%=MOD;
+            res = (res+ transitions(n, i, dp, transitionsFrom)) % MOD;
         }
         return res;
     }
 
-    int[] transitionsFrom(int button) {
+    /*39
+    ms
+            Beats
+52.34%
+    of users with Java*/
+    private int transitions(int n, int lastDigit, int[][]dp, int[][] transitionsFrom) {
+        if (dp[n][lastDigit]!=0)
+            return dp[n][lastDigit];
+        int[] nextDigits = transitionsFrom[lastDigit];
+        for (int nd : nextDigits) {
+            dp[n][lastDigit] = (dp[n][lastDigit] + transitions(n-1, nd, dp, transitionsFrom)) % MOD;
+        }
+        return dp[n][lastDigit];
+    }
+
+    /*int[] transitionsFrom(int button) {
         return switch (button) {
             case 1 -> new int[]{6,8};
             case 2 -> new int[]{7,9};
@@ -34,7 +49,7 @@ public class _935 {
             case 0 -> new int[]{4,6};
             default -> null;
         };
-    }
+    }*/
 
     //naive recursion
     /*private int transitions(int n, int curLen, int lastDigit, int curRes) {
@@ -65,15 +80,15 @@ public class _935 {
             Beats
 47.93%
     of users with Java*/
-    private int transitions(int n, int lastDigit, int[][]dp) {
+    /*private int transitions(int n, int lastDigit, int[][]dp, int[][] transitionsFrom) {
         if (dp[n][lastDigit]!=0)
             return dp[n][lastDigit];
-        int[] nextDigits = transitionsFrom(lastDigit);
+        int[] nextDigits = transitionsFrom[lastDigit];
         for (int nd : nextDigits) {
-            dp[n][lastDigit] = (dp[n][lastDigit] + transitions(n-1, nd, dp)) % MOD;
+            dp[n][lastDigit] = (dp[n][lastDigit] + transitions(n-1, nd, dp, transitionsFrom)) % MOD;
         }
         return dp[n][lastDigit];
-    }
+    }*/
 
     @Test
     public void test() {
