@@ -36,7 +36,7 @@ public class _2147 {
 
     /*Wrong Answer
 136 / 248 testcases passed*/
-    public int numberOfWays(String corridor) {
+    /*public int numberOfWays(String corridor) {
         String sim= simplify(corridor);
         if (sim.contains("S"))
             return 0;
@@ -63,6 +63,40 @@ public class _2147 {
             }
         }
         return res;
+    }*/
+
+    /*152
+    ms
+            Beats
+39.47%
+    of users with Java*/
+    public int numberOfWays(String corridor) {
+        String sim= simplify(corridor);
+        if (sim.contains("S"))
+            return 0;
+        int sectionNum = 0;
+        for (int i = 0; i < sim.length(); i++) {
+            if (sim.charAt(i)=='O')
+                sectionNum++;
+        }
+        if (sectionNum == 0)
+            return 0;
+        if (sectionNum == 1)
+            return 1;
+        int firstSectionIndex = sim.indexOf('O');
+        int lastSectionIndex = sim.lastIndexOf('O');
+        long res = 1;
+        int dividers = 1;
+        int MOD = 1_000_000_007;
+        for (int i = firstSectionIndex; i <= lastSectionIndex; i++) {
+            if (sim.charAt(i)=='P')
+                dividers++;
+            else {
+                res = (res * dividers) % MOD;
+                dividers=1;
+            }
+        }
+        return (int) (res % MOD);
     }
 
     String simplify(String corridor) {
