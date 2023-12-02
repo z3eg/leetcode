@@ -10,7 +10,7 @@ public class _202 {
 
     /*Wrong Answer
     417 / 420 testcases passed*/
-    public boolean isHappy(int n) {
+    /*public boolean isHappy(int n) {
         if (n==1)
             return true;
         if (n<10)
@@ -22,7 +22,32 @@ public class _202 {
             n/=10;
         }
         return isHappy(sum);
+    }*/
+
+
+    /*0
+    ms
+            Beats
+100.00%
+    of users with Java*/
+    public boolean isHappy(int n) {
+        return isHappy(n,0);
     }
+
+    public boolean isHappy(int n, int iterations) {
+        if (n==1)
+            return true;
+        if (iterations > 20)
+            return false;
+        int sum = 0;
+        while (n>=1) {
+            int dig = n % 10;
+            sum+= dig*dig;
+            n/=10;
+        }
+        return isHappy(sum, iterations+1);
+    }
+
 
     @Test
     public void test() {
