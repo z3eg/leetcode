@@ -3,6 +3,11 @@ package com.company;
 //https://leetcode.com/problems/minimum-time-visiting-all-points/
 public class _1266_MinimumTimeVisitingAllPoints {
 
+    /*1
+    ms
+            Beats
+95.62%
+    of users with Java*/
     public int minTimeToVisitAllPoints(int[][] points) {
         int secs = 0;
         int i1 = points.length - 1;
