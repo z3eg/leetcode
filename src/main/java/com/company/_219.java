@@ -56,6 +56,11 @@ public class _219 {
             Beats
 36.70%
     of users with Java*/
+    /*17
+    ms
+            Beats
+75.11%
+    of users with Java*/
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         if (k==0)
             return false;
