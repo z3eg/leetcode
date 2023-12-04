@@ -26,7 +26,7 @@ public class _2264 {
             Beats
 44.87%
     of users with Java*/
-    public String largestGoodInteger(String num) {
+    /*public String largestGoodInteger(String num) {
         boolean found000 = false;
         int maxInt = 0;
         for (int i = 0; i <= num.length() - 3; i++) {
@@ -35,6 +35,26 @@ public class _2264 {
                 found000 = true;
             if (sub.charAt(0)==sub.charAt(1) && sub.charAt(1)==sub.charAt(2))
                 maxInt = Math.max(maxInt, Integer.parseInt(sub));
+        }
+        return maxInt==0?(found000?"000":""):String.valueOf(maxInt);
+    }*/
+
+    /*1
+    ms
+            Beats
+91.57%
+    of users with Java*/
+    public String largestGoodInteger(String num) {
+        boolean found000 = false;
+        int maxInt = 0;
+        char[] chars = num.toCharArray();
+        for (int i = 0; i <= num.length() - 3; i++) {
+            if (chars[i]=='0' && chars[i+1]=='0' && chars[i+2]=='0')
+                found000 = true;
+            if (chars[i]==chars[i+1] && chars[i+2]==chars[i+1]) {
+                int digit = chars[i] - '0';
+                maxInt = Math.max(maxInt, digit *100+ digit *10+ digit);
+            }
         }
         return maxInt==0?(found000?"000":""):String.valueOf(maxInt);
     }
