@@ -40,7 +40,7 @@ public class _257 {
 
     /*Wrong Answer
 206 / 208 testcases passed*/
-    public List<String> binaryTreePaths(TreeNode root) {
+    /*public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new LinkedList<>();
         binaryTreePaths(root, new StringBuilder(), res);
         return res;
@@ -58,6 +58,33 @@ public class _257 {
             binaryTreePaths(root.right, sb, res);
             if (sb.length()>2)
                 sb.delete(sb.length()-3, sb.length());
+        }
+    }*/
+
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new LinkedList<>();
+        binaryTreePaths(root, new StringBuilder(), res);
+        return res;
+    }
+
+    /*1
+    ms
+            Beats
+99.90%
+    of users with Java*/
+    public void binaryTreePaths(TreeNode root, StringBuilder sb, List<String> res) {
+        if (root!=null) {
+            int curLen = sb.length();
+            if (sb.length()>0)
+                sb.append("->");
+            sb.append(root.val);
+            if (root.left==null && root.right==null) {
+                res.add(sb.toString());
+            }
+            binaryTreePaths(root.left, sb, res);
+            binaryTreePaths(root.right, sb, res);
+            if (sb.length()>2)
+                sb.delete(curLen, sb.length());
         }
     }
 
