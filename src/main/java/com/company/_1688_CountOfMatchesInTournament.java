@@ -7,6 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //https://leetcode.com/problems/count-of-matches-in-tournament/
 public class _1688_CountOfMatchesInTournament {
 
+
+    /*0
+    ms
+            Beats
+100.00%
+    of users with Java*/
     public int numberOfMatches(int n) {
         int num = 0;
         while (n>1) {
