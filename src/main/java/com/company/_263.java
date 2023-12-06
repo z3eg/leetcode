@@ -19,8 +19,28 @@ public class _263 {
 
    /* Wrong Answer
     423 / 1013 testcases passed*/
+    /*public boolean isUgly(int n) {
+        for (int i = 2; i < n; i++) {
+            if (n%i==0) {
+                if (isPrime(i))
+                    if (i!=2 && i!=3 && i!=5)
+                        return false;
+            }
+        }
+        return true;
+    }*/
+
+    /*Wrong Answer
+430 / 1013 testcases passed*/
     public boolean isUgly(int n) {
         for (int i = 2; i < n; i++) {
+            if (n%i==0) {
+                if (isPrime(i))
+                    if (i!=2 && i!=3 && i!=5)
+                        return false;
+            }
+        }
+        for (int i = -2; i > n; i--) {
             if (n%i==0) {
                 if (isPrime(i))
                     if (i!=2 && i!=3 && i!=5)
