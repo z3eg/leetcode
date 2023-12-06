@@ -32,7 +32,7 @@ public class _263 {
 
     /*Wrong Answer
 430 / 1013 testcases passed*/
-    public boolean isUgly(int n) {
+    /*public boolean isUgly(int n) {
         for (int i = 2; i < n; i++) {
             if (n%i==0) {
                 if (isPrime(i))
@@ -41,6 +41,21 @@ public class _263 {
             }
         }
         for (int i = -2; i > n; i--) {
+            if (n%i==0) {
+                if (isPrime(i))
+                    if (i!=2 && i!=3 && i!=5)
+                        return false;
+            }
+        }
+        return true;
+    }*/
+
+    /*Wrong Answer
+    432 / 1013 testcases passed*/
+    public boolean isUgly(int n) {
+        if (n<0)
+            return false;
+        for (int i = 2; i < n; i++) {
             if (n%i==0) {
                 if (isPrime(i))
                     if (i!=2 && i!=3 && i!=5)
@@ -63,5 +78,6 @@ public class _263 {
         assertTrue(isUgly(6));
         assertTrue(isUgly(1));
         assertFalse(isUgly(14));
+        assertFalse(isUgly(-11));
     }
 }
