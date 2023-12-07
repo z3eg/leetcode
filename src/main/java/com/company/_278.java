@@ -8,7 +8,7 @@ public class _278 {
 
     int bs(int l, int r) {
         if (l-r < 2)
-            return (isBadVersion(l)?l:r);
+            return (isBadVersion(l)?l:l-1);
         if (l==1 && isBadVersion(l))
             return 1;
         int mid = (r+l)/2;
