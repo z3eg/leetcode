@@ -3,12 +3,12 @@ package com.company;
 public class _278 {
 
     public int firstBadVersion(int n) {
-        return bs(0,n);
+        return bs(1,n);
     }
 
     int bs(int l, int r) {
-        if (l==0 && isBadVersion(l))
-            return 0;
+        if (l==1 && isBadVersion(l))
+            return 1;
         int mid = (r+l)/2;
         if (mid==1 && isBadVersion(mid))
             return 1;
