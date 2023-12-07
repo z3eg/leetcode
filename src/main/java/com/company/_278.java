@@ -13,9 +13,9 @@ public class _278 {
         if (isBadVersion(mid) && !isBadVersion(mid-1))
             return mid;
         if (isBadVersion(mid))
-            return bs(l, mid);
-        if (!isBadVersion(mid))
             return bs(mid, r);
+        if (!isBadVersion(mid))
+            return bs(l, mid);
         return 0;
     }
 
