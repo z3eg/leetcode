@@ -7,7 +7,7 @@ import static org.junit.Assert.assertArrayEquals;
 public class _283 {
 
     //wrong implementation which moves zeroes tho
-    public void moveZeroes(int[] nums) {
+    /*public void moveZeroes(int[] nums) {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
@@ -22,6 +22,25 @@ public class _283 {
                         nums[i] = nums[swapPos];
                         nums[swapPos] = 0;
                     }
+                }
+            }
+        }
+    }*/
+
+    /*213
+    ms
+            Beats
+5.04%
+    of users with Java*/
+    public void moveZeroes(int[] nums) {
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < nums.length-1; i++) {
+                if (nums[i]==0 && nums[i+1]!=0) {
+                    sorted = false;
+                    nums[i] = nums[i+1];
+                    nums[i+1] = 0;
                 }
             }
         }
