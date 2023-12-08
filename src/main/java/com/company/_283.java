@@ -5,8 +5,26 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertArrayEquals;
 
 public class _283 {
-    public void moveZeroes(int[] nums) {
 
+    //wrong implementation which moves zeroes tho
+    public void moveZeroes(int[] nums) {
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < nums.length-1; i++) {
+                if (nums[i]==0) {
+                    int swapPos = nums.length-1;
+                    while (nums[swapPos]==0 && swapPos > i) {
+                        swapPos--;
+                    }
+                    if (swapPos>i) {
+                        sorted = false;
+                        nums[i] = nums[swapPos];
+                        nums[swapPos] = 0;
+                    }
+                }
+            }
+        }
     }
 
     @Test
