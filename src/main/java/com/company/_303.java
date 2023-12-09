@@ -32,7 +32,7 @@ public class _303 {
             Beats
 5.73%
     of users with Java*/
-    class NumArray {
+    /*class NumArray {
 
         int[] arr;
 
@@ -53,6 +53,27 @@ public class _303 {
             }
             map.put(key,sum);
             return sum;
+        }
+    }*/
+
+
+//    Memory Limit Exceeded
+    class NumArray {
+
+        int[][] sums = new int[10000][10000];
+
+        public NumArray(int[] nums) {
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = i; j < nums.length; j++) {
+                    for (int k = i; k <= j; k++) {
+                        sums[i][j]+=nums[k];
+                    }
+                }
+            }
+        }
+
+        public int sumRange(int left, int right) {
+            return sums[left][right];
         }
     }
 }
