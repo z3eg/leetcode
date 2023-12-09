@@ -6,8 +6,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class _292 {
-    public boolean canWinNim(int n) {
 
+    /*0
+    ms
+            Beats
+100.00%
+    of users with Java*/
+    public boolean canWinNim(int n) {
+        return n%4!=0;
     }
 
     @Test
