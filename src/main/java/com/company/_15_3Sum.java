@@ -1,7 +1,5 @@
 package com.company;
 
-import scala.Int;
-
 import java.util.*;
 
 public class _15_3Sum {
