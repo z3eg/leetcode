@@ -58,7 +58,7 @@ public class _303 {
 
 
 //    Memory Limit Exceeded
-    class NumArray {
+    /*class NumArray {
 
         int[][] sums = new int[10000][10000];
 
@@ -74,6 +74,31 @@ public class _303 {
 
         public int sumRange(int left, int right) {
             return sums[left][right];
+        }
+    }*/
+
+    /*7
+    ms
+            Beats
+99.65%
+    of users with Java*/
+    class NumArray {
+
+        int[] sums;
+
+        public NumArray(int[] nums) {
+            sums = new int[nums.length];
+            int sum = 0;
+            for (int i = 0; i < sums.length; i++) {
+                sum+=nums[i];
+                sums[i] = sum;
+            }
+        }
+
+        public int sumRange(int left, int right) {
+            if (left == 0)
+                return sums[right];
+            return sums[right]-sums[left-1];
         }
     }
 }
