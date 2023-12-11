@@ -8,7 +8,7 @@ public class _345 {
 
 /*    Runtime Error
 10 / 480 testcases passed*/
-    public String reverseVowels(String s) {
+    /*public String reverseVowels(String s) {
         char[] chars = s.toCharArray();
         int l = 0;
         int r = s.length()-1;
@@ -17,6 +17,33 @@ public class _345 {
                 l++;
             }
             while (!isVowel(chars[r])) {
+                r--;
+            }
+            if (l < r) {
+                char tmp = chars[l];
+                chars[l] = chars[r];
+                chars[r] = tmp;
+                l++;
+                r--;
+            }
+        }
+        return new String(chars);
+    }*/
+
+    /*2
+    ms
+            Beats
+99.38%
+    of users with Java*/
+    public String reverseVowels(String s) {
+        char[] chars = s.toCharArray();
+        int l = 0;
+        int r = s.length()-1;
+        while (l<r) {
+            while (l < s.length() && !isVowel(chars[l])) {
+                l++;
+            }
+            while (r > -1 && !isVowel(chars[r])) {
                 r--;
             }
             if (l < r) {
@@ -43,5 +70,6 @@ public class _345 {
         assertEquals("aa", reverseVowels("aa"));
         assertEquals("aOa", reverseVowels("aOa"));
         assertEquals("aOA", reverseVowels("AOa"));
+        assertEquals(".,", reverseVowels(".,"));
     }
 }
