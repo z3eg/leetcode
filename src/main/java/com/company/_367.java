@@ -12,7 +12,7 @@ public class _367 {
             Beats
 100.00%
     of users with Java*/
-    public boolean isPerfectSquare(int num) {
+    /*public boolean isPerfectSquare(int num) {
         return bs(1,46340, num) != -1;
     }
 
@@ -34,6 +34,16 @@ public class _367 {
         else  {
             return bs(mid, r, num);
         }
+    }*/
+
+
+    /*0
+    ms
+            Beats
+100.00%
+    of users with Java*/
+    public boolean isPerfectSquare(int num) {
+        return Math.pow(num,0.5)%1==0;
     }
 
     @Test
