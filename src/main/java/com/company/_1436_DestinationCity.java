@@ -6,6 +6,7 @@ import java.util.List;
 //https://leetcode.com/problems/destination-city/
 public class _1436_DestinationCity {
 
+    /*Runtime: 1 ms, faster than 100.00% of Java online submissions for Destination City.*/
     public String destCity(List<List<String>> paths) {
         HashSet<String> startPoints = new HashSet<>();
         for (List<String> path : paths) {
