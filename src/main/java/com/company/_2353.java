@@ -236,6 +236,8 @@ public class _2353 {
         }
     }*/
 
+    /*Time Limit Exceeded
+73 / 77 testcases passed*/
     class FoodRatings {
 
         class Food {
@@ -290,13 +292,10 @@ public class _2353 {
             else {
                 //introduce BS if sequential is not enough
                 int curPos = 0;
-                Food cur = list.get(curPos);
-                while (cur.rating > rating && curPos < list.size()) {
-                    cur = list.get(curPos);
+                while (curPos < list.size() && rating<list.get(curPos).rating ) {
                     curPos++;
                 }
-                while (cur.rating == rating && cur.name.compareTo(food) < 0) {
-                    cur = list.get(curPos);
+                while (curPos < list.size() && rating == list.get(curPos).rating && food.compareTo(list.get(curPos).name) > 0) {
                     curPos++;
                 }
                 list.add(curPos, new Food(food, rating));
