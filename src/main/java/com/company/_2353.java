@@ -168,6 +168,74 @@ public class _2353 {
 
     /*Wrong Answer
     42 / 77 testcases passed*/
+    /*class FoodRatings {
+
+        class Food {
+            String name;
+            int rating;
+
+            public Food(String name, int rating) {
+                this.name = name;
+                this.rating = rating;
+            }
+        }
+
+        Map<String, List<Food>> map;
+
+        Map<String, String> foodToCategoryMap;
+
+        public FoodRatings(String[] foods, String[] cuisines, int[] ratings) {
+            map = new HashMap<>();
+            foodToCategoryMap = new HashMap<>();
+            for (int i = 0; i < foods.length; i++) {
+                foodToCategoryMap.put(foods[i], cuisines[i]);
+                List<Food> val = map.get(cuisines[i]);
+                if (val == null) {
+                    val = new LinkedList<>();
+                }
+                insort(val, ratings[i],foods[i]); //insertion sort here
+                map.put(cuisines[i], val);
+            }
+        }
+
+        public void changeRating(String food, int newRating) {
+            //introduce BS if sequential is not enough
+            String cuisine = foodToCategoryMap.get(food);
+            List<Food> foods = map.get(cuisine);
+            for (int i = 0; i < foods.size(); i++) {
+                Food curFood = foods.get(i);
+                if (curFood.name.equals(food)) {
+                    foods.remove(curFood);
+                    break;
+                }
+            }
+            insort(foods, newRating, food);
+        }
+
+        public String highestRated(String cuisine) {
+            return map.get(cuisine).get(0).name;
+        }
+
+        private void insort(List<Food> list, int rating, String food) {
+            if (list.isEmpty())
+                list.add(new Food(food, rating));
+            else {
+                //introduce BS if sequential is not enough
+                int curPos = 0;
+                Food cur = list.get(curPos);
+                while (cur.rating > rating && curPos < list.size()) {
+                    cur = list.get(curPos);
+                    curPos++;
+                }
+                while (cur.rating == rating && cur.name.compareTo(food) < 0) {
+                    cur = list.get(curPos);
+                    curPos++;
+                }
+                list.add(curPos, new Food(food, rating));
+            }
+        }
+    }*/
+
     class FoodRatings {
 
         class Food {
@@ -254,7 +322,15 @@ public class _2353 {
         assertEquals("mxmauspoh", fr.highestRated("qgjuq"));
         fr.changeRating("hcfnzpnqf",2);
         fr.changeRating("pgtdjqyl",12);
-        fr.changeRating("hcfnzpnqf",6);
+            fr.changeRating("hcfnzpnqf",6);
+
+        fr = new FoodRatings(new String[]{"czopaaeyl","lxoozsbh","kbaxapl"},
+                new String[]{"dmnuqeatj","dmnuqeatj","dmnuqeatj"}, new int[]{11,2,15});
+        fr.changeRating("czopaaeyl",12);
+        assertEquals("kbaxapl", fr.highestRated("dmnuqeatj"));
+        fr.changeRating("kbaxapl",8);
+        fr.changeRating("lxoozsbh",5);
+        assertEquals("czopaaeyl", fr.highestRated("dmnuqeatj"));
 //        fr = new FoodRatings(new String[]{}, new String[]{}, new int[]{});
 //        fr.changeRating("sushi",16);
 //        assertEquals("", fr.highestRated("korean"));
