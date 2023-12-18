@@ -303,6 +303,7 @@ public class _2353 {
         }
     }
 
+
     @Test
     public void test() {
         FoodRatings fr;
