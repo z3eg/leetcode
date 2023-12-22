@@ -5,12 +5,32 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class _1422 {
-    public int maxScore(String s) {
 
+    /*Wrong Answer
+96 / 104 testcases passed*/
+    public int maxScore(String s) {
+        int score = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i)=='1') {
+                score++;
+            }
+        }
+        int max_score = score-1;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i)=='0') {
+                score++;
+                max_score = Math.max(score, max_score);
+            }
+            else {
+                score--;
+            }
+        }
+        return max_score;
     }
 
     @Test
     public void test() {
+        assertEquals(3, maxScore("111001"));
         assertEquals(5, maxScore("011101"));
         assertEquals(5, maxScore("00111"));
         assertEquals(3, maxScore("1111"));
