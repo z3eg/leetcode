@@ -26,8 +26,26 @@ public class _409 {
 
     /*Runtime Error
 35 / 95 testcases passed*/
-    public int longestPalindrome(String s) {
+    /*public int longestPalindrome(String s) {
         int[] freqs = new int[52];
+        for (char c : s.toCharArray()) {
+            freqs[c-'A']++;
+        }
+        int res = 0;
+        int maxOdd = 0;
+        for (int f : freqs) {
+            if (f%2==0)
+                res+=f;
+            else
+                maxOdd = Math.max(maxOdd, f);
+        }
+        return res+maxOdd;
+    }*/
+
+    /*Wrong Answer
+49 / 95 testcases passed*/
+    public int longestPalindrome(String s) {
+        int[] freqs = new int[60];
         for (char c : s.toCharArray()) {
             freqs[c-'A']++;
         }
@@ -49,5 +67,6 @@ public class _409 {
         assertEquals(3, longestPalindrome("aaa"));
         assertEquals(4, longestPalindrome("aaaa"));
         assertEquals(4, longestPalindrome("AAAA"));
+        assertEquals(55, longestPalindrome("zeusnilemacaronimaisanitratetartinasiaminoracamelinsuez"));
     }
 }
