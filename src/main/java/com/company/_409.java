@@ -8,10 +8,28 @@ public class _409 {
 
     /*Runtime Error
 26 / 95 testcases passed*/
-    public int longestPalindrome(String s) {
+    /*public int longestPalindrome(String s) {
         int[] freqs = new int[27];
         for (char c : s.toCharArray()) {
             freqs[c-'a']++;
+        }
+        int res = 0;
+        int maxOdd = 0;
+        for (int f : freqs) {
+            if (f%2==0)
+                res+=f;
+            else
+                maxOdd = Math.max(maxOdd, f);
+        }
+        return res+maxOdd;
+    }*/
+
+    /*Runtime Error
+35 / 95 testcases passed*/
+    public int longestPalindrome(String s) {
+        int[] freqs = new int[52];
+        for (char c : s.toCharArray()) {
+            freqs[c-'A']++;
         }
         int res = 0;
         int maxOdd = 0;
@@ -30,5 +48,6 @@ public class _409 {
         assertEquals(1, longestPalindrome("a"));
         assertEquals(3, longestPalindrome("aaa"));
         assertEquals(4, longestPalindrome("aaaa"));
+        assertEquals(4, longestPalindrome("AAAA"));
     }
 }
