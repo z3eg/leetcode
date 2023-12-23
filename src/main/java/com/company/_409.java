@@ -44,7 +44,7 @@ public class _409 {
 
     /*Wrong Answer
 49 / 95 testcases passed*/
-    public int longestPalindrome(String s) {
+    /*public int longestPalindrome(String s) {
         int[] freqs = new int[60];
         for (char c : s.toCharArray()) {
             freqs[c-'A']++;
@@ -58,6 +58,26 @@ public class _409 {
                 maxOdd = Math.max(maxOdd, f);
         }
         return res+maxOdd;
+    }*/
+
+    /*1
+    ms
+            Beats
+100.00%
+    of users with Java*/
+    public int longestPalindrome(String s) {
+        int[] freqs = new int[60];
+        for (char c : s.toCharArray()) {
+            freqs[c-'A']++;
+        }
+        int res = 0;
+        boolean hasOdd = false;
+        for (int f : freqs) {
+            if (f%2!=0)
+                hasOdd = true;
+            res+=f-f%2;
+        }
+        return res+(hasOdd?1:0);
     }
 
     @Test
