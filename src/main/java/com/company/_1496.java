@@ -14,7 +14,7 @@ public class _1496 {
             Beats
 51.76%
     of users with Java*/
-    public boolean isPathCrossing(String path) {
+    /*public boolean isPathCrossing(String path) {
 
         int[][] coords = new int[path.length()+1][2];
         int[] coord = new int[2];
@@ -36,10 +36,33 @@ public class _1496 {
             coords[i+1][1] = coord[1];
         }
         return false;
+    }*/
+
+    public boolean isPathCrossing(String path) {
+
+        int N = 0;
+        int S = 0;
+        int E = 0;
+        int W = 0;
+
+        for (char c : path.toCharArray()) {
+            switch (c) {
+                case 'N' -> N++;
+                case 'S' -> S++;
+                case 'E' -> E++;
+                case 'W' -> W++;
+            }
+            if (N==S && E==W)
+                return true;
+        }
+
+        return false;
+
     }
 
     @Test
     public void test() {
+        assertTrue(isPathCrossing("NNESW"));
         assertTrue(isPathCrossing("NNEESSWW"));
         assertFalse(isPathCrossing("N"));
         assertFalse(isPathCrossing("NES"));
