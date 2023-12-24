@@ -33,7 +33,7 @@ public class _1758 {
             Beats
     5.90%
     of users with Java*/
-    public int minOperations(String s) {
+    /*public int minOperations(String s) {
         int min = Integer.MAX_VALUE;
         for (int i = 0; i < s.length(); i++) {
             char[] chars = s.toCharArray();
@@ -55,6 +55,31 @@ public class _1758 {
             min = Math.min(min, count);
         }
         return min;
+    }*/
+
+    /*Runtime
+    2
+    ms
+    Beats
+    98.03%
+    of users with Java*/
+    public int minOperations(String s) {
+        char[] chars = s.toCharArray();
+        char c = '0';
+        int min0 = 0;
+        for (char aChar : chars) {
+            if (aChar != c)
+                min0++;
+            c = c == '0' ? '1' : '0';
+        }
+        c = '1';
+        int min1 = 0;
+        for (char aChar : chars) {
+            if (aChar != c)
+                min1++;
+            c = c == '0' ? '1' : '0';
+        }
+        return Math.min(min0, min1);
     }
 
     @Test
