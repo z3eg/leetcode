@@ -97,7 +97,7 @@ public class _91 {
 
     /*Wrong Answer
 116 / 269 testcases passed*/
-    Map<String, Integer> map = new HashMap<>();
+    /*Map<String, Integer> map = new HashMap<>();
 
     public int numDecodings(String s) {
         Integer val = map.get(s);
@@ -125,6 +125,27 @@ public class _91 {
         if (s.length()==1)
             return 1;
         return 0;
+    }*/
+
+    public int numDecodings(String s) {
+        int[] dp = new int[s.length()];
+        Arrays.fill(dp,-1);
+        char[] chars = s.toCharArray();
+        return dp(0, chars, dp);
+    }
+
+    int dp(int i, char[] arr, int[] dp) {
+        if (i == arr.length)
+            return 1;
+        if (dp[i] != -1)
+            return dp[i];
+        if (arr[i] == '0')
+            return 0;
+        int res = dp(i+1, arr, dp);
+        if (i+1 < arr.length && (arr[i]=='1' || (arr[i]=='2' && arr[i+1]<'7')))
+            res+=dp(i+2, arr, dp);
+        dp[i] = res;
+        return dp[i];
     }
 
     @Test
