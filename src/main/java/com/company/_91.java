@@ -2,15 +2,12 @@ package com.company;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class _91 {
-    public int numDecodings(String s) {
+    /*public int numDecodings(String s) {
         if (s.startsWith("0"))
             return 0;
         if (s.contains("00"))
@@ -39,16 +36,40 @@ public class _91 {
         if (s.length()>2)
             return false;
         return Integer.parseInt(s) <= 26;
+    }*/
+
+    /*Wrong Answer
+41 / 269 testcases passed*/
+    Map<String, Integer> map = new HashMap<>();
+
+    public int numDecodings(String s) {
+        Integer val = map.get(s);
+        if (val != null)
+            return val;
+        if (s.startsWith("0"))
+            return 0;
+        if (s.length()>2) {
+            int num = Math.max(numDecodings(s.substring(0, 1)) + numDecodings(s.substring(1)) ,
+                    numDecodings(s.substring(0, 2)) + numDecodings(s.substring(2)));
+            map.put(s, num);
+            return num;
+        }
+        if (s.length()==2) {
+            return 2;
+        }
+        if (s.length()==1)
+            return 1;
+        return 0;
     }
 
     @Test
     public void test() {
-        assertEquals(2, numDecodings("12"));
         assertEquals(3, numDecodings("226"));
+        assertEquals(2, numDecodings("12"));
         assertEquals(0, numDecodings("06"));
     }
 
-    @Test
+    /*@Test
     public void testCanDecode() {
         assertFalse(canDecode("0"));
         assertFalse(canDecode("01"));
@@ -61,5 +82,5 @@ public class _91 {
         assertTrue(canDecode("1"));
         assertTrue(canDecode("26"));
         assertTrue(canDecode("15"));
-    }
+    }*/
 }
