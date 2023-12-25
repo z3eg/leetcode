@@ -65,7 +65,7 @@ public class _91 {
 
     /*Wrong Answer
     116 / 269 testcases passed*/
-    Map<String, Integer> map = new HashMap<>();
+    /*Map<String, Integer> map = new HashMap<>();
 
     public int numDecodings(String s) {
         Integer val = map.get(s);
@@ -93,10 +93,43 @@ public class _91 {
         if (s.length()==1)
             return 1;
         return 0;
+    }*/
+
+    /*Wrong Answer
+116 / 269 testcases passed*/
+    Map<String, Integer> map = new HashMap<>();
+
+    public int numDecodings(String s) {
+        Integer val = map.get(s);
+        if (val != null)
+            return val;
+        if (s.startsWith("0"))
+            return 0;
+        if (s.length()>2) {
+            int num = Math.max(numDecodings(s.substring(0, 1)) + numDecodings(s.substring(1)) ,
+                    numDecodings(s.substring(0, 2)) + numDecodings(s.substring(2)));
+            map.put(s, num);
+            return num;
+        }
+        if (s.length()==2) {
+            if (s.contains("0")) {
+                if (s.contains("1") || s.contains("2"))
+                    return 1;
+                else
+                    return 0;
+            }
+            else {
+                return Integer.parseInt(s) < 27? 2: 1;
+            }
+        }
+        if (s.length()==1)
+            return 1;
+        return 0;
     }
 
     @Test
     public void test() {
+        assertEquals(1, numDecodings("2101"));
         assertEquals(3, numDecodings("226"));
         assertEquals(2, numDecodings("12"));
         assertEquals(0, numDecodings("06"));
