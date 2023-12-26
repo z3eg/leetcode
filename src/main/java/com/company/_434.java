@@ -14,14 +14,23 @@ public class _434 {
 
     /*Wrong Answer
 21 / 28 testcases passed*/
-    public int countSegments(String s) {
+    /*public int countSegments(String s) {
         if (s.length()==0)
             return 0;
         return s.split(" ").length;
+    }*/
+
+    /*Wrong Answer
+25 / 28 testcases passed*/
+    public int countSegments(String s) {
+        if (s.length()==0)
+            return 0;
+        return s.split("\s+").length;
     }
 
     @Test
     public void test() {
+        assertEquals(6, countSegments(", , , ,        a, eaefa"));
         assertEquals(0, countSegments(""));
         assertEquals(0, countSegments(" "));
         assertEquals(0, countSegments("  "));
