@@ -13,7 +13,7 @@ public class _492 {
 
     /*Wrong Answer
 48 / 52 testcases passed*/
-    public int[] constructRectangle(int area) {
+    /*public int[] constructRectangle(int area) {
         int L = area;
         int W = 1;
         int[] res = new int[]{L,W};
@@ -21,6 +21,26 @@ public class _492 {
             W++;
             L=area/W;
             if (L*W==area) {
+                res[0] = L;
+                res[1] = W;
+            }
+        }
+        return res;
+    }*/
+
+    /*1
+    ms
+            Beats
+31.60%
+    of users with Java*/
+    public int[] constructRectangle(int area) {
+        int L = area;
+        int W = 1;
+        int[] res = new int[]{L,W};
+        while (W<L) {
+            W++;
+            L=area/W;
+            if (L>=W && L*W==area) {
                 res[0] = L;
                 res[1] = W;
             }
