@@ -8,13 +8,31 @@ public class _504 {
 
     /*Wrong Answer
 138 / 241 testcases passed*/
-    public String convertToBase7(int num) {
+    /*public String convertToBase7(int num) {
         StringBuilder res = new StringBuilder();
         while (Math.abs(num)>=7) {
             res.insert(0, num%7);
             num/=7;
         }
         res.insert(0, num%7);
+        return res.toString();
+    }*/
+
+    /*2
+    ms
+            Beats
+23.07%
+    of users with Java*/
+    public String convertToBase7(int num) {
+        StringBuilder res = new StringBuilder();
+        int abs = Math.abs(num);
+        while (abs >=7) {
+            res.insert(0, abs%7);
+            abs/=7;
+        }
+        res.insert(0, abs%7);
+        if (num < 0)
+            res.insert(0,"-");
         return res.toString();
     }
 
