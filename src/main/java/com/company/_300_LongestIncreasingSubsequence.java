@@ -7,8 +7,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //TODO
 //https://leetcode.com/problems/longest-increasing-subsequence/
 public class _300_LongestIncreasingSubsequence {
+
+    /*Wrong Answer
+35 / 55 testcases passed*/
     public int lengthOfLIS(int[] nums) {
-        return 0;
+        int[] dp = new int[nums.length];
+        dp[nums.length-1] = 1;
+        int longest = 1;
+        for (int i = nums.length-1; i >=0 ; i--) {
+            for (int j = i+1; j < nums.length; j++) {
+                if (nums[i] < nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    longest = Math.max(longest, dp[i]);
+                }
+            }
+        }
+        return longest;
     }
 
     @Test
