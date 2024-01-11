@@ -43,7 +43,7 @@ public class _2385 {
 
     /*Wrong Answer
 56 / 80 testcases passed*/
-    public int amountOfTime(TreeNode root, int start) {
+    /*public int amountOfTime(TreeNode root, int start) {
         List<List<Integer>> paths = new LinkedList<>();
         bfs(root, new LinkedList<>(), paths, start);
         int max = 0;
@@ -71,5 +71,17 @@ public class _2385 {
             }
             curPath.remove(Integer.valueOf(root.val));
         }
+    }*/
+
+    /*class GNode {
+        public List<GNode> neighbours;
     }
+
+    public int amountOfTime(TreeNode root, int start) {
+
+    }
+
+    private void convertToGraph(TreeNode root, int start) {
+
+    }*/
 }
