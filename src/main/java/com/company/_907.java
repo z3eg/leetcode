@@ -68,7 +68,7 @@ public class _907 {
     }*/
 
     //TLE
-    public int sumSubarrayMins(int[] arr) {
+    /*public int sumSubarrayMins(int[] arr) {
         Map<String, Integer> map = new HashMap<>();
         int MODULO = 1_000_000_007;
         int sum = 0;
@@ -92,6 +92,35 @@ public class _907 {
             else
                 min = Math.min(arr[start], min(start+1, len-1, map, arr));
             map.put(key,min);
+        }
+        return min;
+    }*/
+
+
+    //MLE
+    public int sumSubarrayMins(int[] arr) {
+        int[][] dp = new int[30001][30001];
+        int MODULO = 1_000_000_007;
+        int sum = 0;
+        for (int len = 1; len <= arr.length; len++) {
+            for (int start = 0; start <= arr.length - len; start++) {
+                int min = min(start, len, dp, arr);
+                sum=(sum+min)%MODULO;
+            }
+        }
+        return sum%MODULO;
+    }
+
+    int min(int start, int len, int[][] dp, int[] arr) {
+        int min;
+        if (dp[start][len]!=0)
+            min = dp[start][len];
+        else {
+            if (start+1 == arr.length || len==1)
+                min = arr[start];
+            else
+                min = Math.min(arr[start], min(start+1, len-1, dp, arr));
+            dp[start][len] = min;
         }
         return min;
     }
