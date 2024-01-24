@@ -12,7 +12,7 @@ public class _1457 {
 
     /*Time Limit Exceeded
 53 / 56 testcases passed*/
-    public int pseudoPalindromicPaths (TreeNode root) {
+    /*public int pseudoPalindromicPaths (TreeNode root) {
         List<List<Integer>> paths = new LinkedList<>();
         gatherPaths(root, new LinkedList<>(), paths);
         int counter = 0;
@@ -23,7 +23,7 @@ public class _1457 {
         return counter;
     }
 
-    void gatherPaths(TreeNode root, List<Integer> curPath /*TODO try stack here*/, List<List<Integer>> paths) {
+    void gatherPaths(TreeNode root, List<Integer> curPath *//*TODO try stack here*//*, List<List<Integer>> paths) {
         if (root!=null) {
             curPath.add(root.val);
             if (root.left == null && root.right == null) {
@@ -55,41 +55,50 @@ public class _1457 {
             }
         }
         return true;
+    }*/
+
+    /*11
+    ms
+            Beats
+77.94%
+    of users with Java*/
+    int counter;
+
+    public int pseudoPalindromicPaths (TreeNode root) {
+        counter = 0;
+        gatherPaths(root, new int[10]);
+        return counter;
     }
 
-    @Test
-    public void testIsPP() {
-        List<Integer> list = new LinkedList<>();
-        list.add(2);
-        list.add(1);
-        list.add(1);
-        assertTrue(isPP(list));
+    void gatherPaths(TreeNode root, int[] freqs) {
+        if (root!=null) {
+            freqs[root.val]++;
+            if (root.left == null && root.right == null) {
+                if (isPP(freqs))
+                    counter++;
+            }
+            else {
+                if (root.left!=null) {
+                    gatherPaths(root.left, freqs);
+                }
+                if (root.right!=null) {
+                    gatherPaths(root.right, freqs);
+                }
+            }
+            freqs[root.val]--;
+        }
+    }
 
-        list = new LinkedList<>();
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        assertTrue(isPP(list));
-
-        list = new LinkedList<>();
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(2);
-        list.add(2);
-        assertTrue(isPP(list));
-
-        list = new LinkedList<>();
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        assertFalse(isPP(list));
-
-        list = new LinkedList<>();
-        list.add(1);
-        assertTrue(isPP(list));
+    boolean isPP(int[] freqs) {
+        boolean oddFound = false;
+        for (int i = 1; i < 10; i++) {
+            if (freqs[i]%2==1) {
+                if (oddFound)
+                    return false;
+                oddFound = true;
+            }
+        }
+        return true;
     }
 
     @Test
