@@ -23,13 +23,27 @@ public class _628 {
 
     /*Wrong Answer
     90 / 92 testcases passed*/
-    public int maximumProduct(int[] nums) {
+    /*public int maximumProduct(int[] nums) {
         Arrays.sort(nums);
         return nums[nums.length-1]*Math.max(nums[nums.length-2]*nums[nums.length-3],nums[0]*nums[1]);
+    }*/
+
+    /*11
+    ms
+            Beats
+79.84%
+    of users with Java*/
+    public int maximumProduct(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        return Math.max(nums[n-1]*nums[n-2]*nums[n-3],nums[0]*nums[1]*nums[n-1]);
     }
 
     @Test
     public void test() {
+        assertEquals(60, maximumProduct(new int[]{-5,-4,0,1,2,3}));
+        assertEquals(6, maximumProduct(new int[]{0,1,2,3}));
+        assertEquals(0, maximumProduct(new int[]{0,-1,-2,-3}));
         assertEquals(6, maximumProduct(new int[]{1,2,3}));
         assertEquals(24, maximumProduct(new int[]{1,2,3,4}));
         assertEquals(-6, maximumProduct(new int[]{-1,-2,-3}));
