@@ -11,7 +11,7 @@ public class _643 {
             Beats
 39.32%
     of users with Java*/
-    public double findMaxAverage(int[] nums, int k) {
+    /*public double findMaxAverage(int[] nums, int k) {
         double max = Integer.MIN_VALUE;
         double curSum = 0;
         for (int i = 0; i < k; i++) {
@@ -24,6 +24,27 @@ public class _643 {
             max = Math.max(max, curSum/k);
         }
         return max;
+    }*/
+
+
+    /*5
+    ms
+            Beats
+39.32%
+    of users with Java*/
+    public double findMaxAverage(int[] nums, int k) {
+        double max = Integer.MIN_VALUE;
+        double curSum = 0;
+        for (int i = 0; i < k; i++) {
+            curSum+=nums[i];
+        }
+        max = Math.max(max, curSum);
+        for (int i = 0; i < nums.length - k; i++) {
+            curSum-=nums[i];
+            curSum+=nums[i+k];
+            max = Math.max(max, curSum);
+        }
+        return max/k;
     }
 
     @Test
