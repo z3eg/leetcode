@@ -2,31 +2,43 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.Stack;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class _232 {
 
+    /*Wrong Answer
+17 / 22 testcases passed*/
     class MyQueue {
 
-        public MyQueue() {
+        Stack<Integer> stack1;
+        Stack<Integer> stack2;
 
+        public MyQueue() {
+            stack1 = new Stack<>();
+            stack2 = new Stack<>();
         }
 
         public void push(int x) {
-
+            if (!stack2.isEmpty())
+                stack1.push(stack2.pop());
+            stack2.push(x);
+            if (!stack1.isEmpty())
+                stack2.push(stack1.pop());
         }
 
         public int pop() {
-            return 0;
+            return stack2.pop();
         }
 
         public int peek() {
-            return 0;
+            return stack2.peek();
         }
 
         public boolean empty() {
-            return true;
+            return stack2.empty();
         }
     }
 
