@@ -8,9 +8,25 @@ public class _1492 {
 
     /*Wrong Answer
 177 / 208 testcases passed*/
-    public int kthFactor(int n, int k) {
+    /*public int kthFactor(int n, int k) {
         int counter = 1;
         for (int i = 2; i <= n; i++) {
+            if (n%i==0)
+                counter++;
+            if (counter==k)
+                return i;
+        }
+        return -1;
+    }*/
+
+    /*0
+    ms
+            Beats
+100.00%
+    of users with Java*/
+    public int kthFactor(int n, int k) {
+        int counter = 0;
+        for (int i = 1; i <= n; i++) {
             if (n%i==0)
                 counter++;
             if (counter==k)
