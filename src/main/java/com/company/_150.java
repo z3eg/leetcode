@@ -2,6 +2,8 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +14,7 @@ public class _150 {
             Beats
 17.97%
     of users with Java*/
-    public int evalRPN(String[] tokens) {
+    /*public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
         int a = 0;
         int b = 0;
@@ -31,6 +33,37 @@ public class _150 {
                     stack.push(b);
                     stack.push(Integer.valueOf(t));
                 }
+            }
+        }
+        return stack.pop();
+    }*/
+
+    /*5
+    ms
+            Beats
+97.05%
+    of users with Java*/
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> stack = new LinkedList<>();
+        for (String t : tokens) {
+            switch (t) {
+                case "+" -> {
+                    int b = stack.pop();
+                    stack.push(stack.pop() + b);
+                }
+                case "-" -> {
+                    int b = stack.pop();
+                    stack.push(stack.pop()-b);
+                }
+                case "*" -> {
+                    int b = stack.pop();
+                    stack.push(stack.pop()*b);
+                }
+                case "/" -> {
+                    int b = stack.pop();
+                    stack.push(stack.pop()/b);
+                }
+                default -> stack.push(Integer.valueOf(t));
             }
         }
         return stack.pop();
