@@ -52,7 +52,7 @@ public class _680 {
 
     /*Time Limit Exceeded
 427 / 471 testcases passed*/
-    public boolean validPalindrome(String s) {
+    /*public boolean validPalindrome(String s) {
         if (isPalindrome(s))
             return true;
         for (int i = 0; i < s.length(); i++) {
@@ -94,16 +94,41 @@ public class _680 {
             }
         }
         return true;
+    }*/
+
+
+    /*4
+    ms
+            Beats
+99.76%
+    of users with Java*/
+    public boolean validPalindrome(String s) {
+        return isPalindrome(s, false);
     }
 
-    @Test
+    boolean isPalindrome(String s, boolean isInner) {
+        int r = s.length()-1;
+        int l = 0;
+        while (l<r) {
+            if (s.charAt(l) == s.charAt(r)) {
+                l++;
+                r--;
+            }
+            else {
+                return isInner?false:(isPalindrome(s.substring(l,r),true) || isPalindrome(s.substring(l+1,r+1),true));
+            }
+        }
+        return true;
+    }
+
+   /* @Test
     public void testIsPalindrome() {
         assertTrue(isPalindrome("aba"));
         assertTrue(isPalindrome("abba"));
         assertTrue(isPalindrome("abcccba"));
         assertFalse(isPalindrome("abca"));
         assertFalse(isPalindrome("abc"));
-    }
+    }*/
 
     @Test
     public void test() {
