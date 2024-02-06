@@ -57,8 +57,7 @@ public class _49_GroupAnagrams {
             char[] charArray = s.toCharArray();
             Arrays.sort(charArray);
             String key = new String(charArray);
-            map.computeIfAbsent(key, v -> new ArrayList<>());
-            map.get(key).add(s);
+            map.computeIfAbsent(key, v -> new ArrayList<>()).add(s);
         }
         return new LinkedList<>(map.values());
     }
