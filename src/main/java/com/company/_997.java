@@ -22,11 +22,11 @@ public class _997 {
         return -1;
     }*/
 
-    /*3
-    ms
-            Beats
-71.04%
-    of users with Java*/
+    /*2
+ms
+Beats
+99.85%
+of users with Java*/
     public int findJudge(int n, int[][] trust) {
         if (n==1)
             return 1;
