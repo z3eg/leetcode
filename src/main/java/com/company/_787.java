@@ -2,11 +2,52 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static org.junit.Assert.assertEquals;
 
 public class _787 {
+
+    class Node {
+        int id;
+        int curPrice;
+        int curLen;
+
+        public Node(int id, int curPrice, int curLen) {
+            this.id = id;
+            this.curPrice = curPrice;
+            this.curLen = curLen;
+        }
+    }
+
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-        return 0;
+        int[][] prices = new int[n][n];
+        int[] cumPrices = new int[flights.length];
+        for (int[] flight : flights) {
+            prices[flight[0]][flight[1]] = flight[2];
+            prices[flight[1]][flight[0]] = flight[2];
+        }
+        Queue<Node> q = new LinkedList<>();
+        int minPrice = Integer.MAX_VALUE;
+        q.add(new Node(src, 0,0));
+        while (!q.isEmpty()) {
+            Node curNode = q.poll();
+            if (curNode.id == dst)
+                minPrice = Math.min(minPrice, curNode.curPrice);
+            else {
+                for (int i = 0; i < flights.length; i++) {
+                    if (prices[curNode.id][i]!=0) {
+                        if (cumPrices[i] != 0)
+                            return 0; //THIS PROBLEM LOST ME HERE
+//                            cumPrices[i]= Math.min()
+                    }
+
+                }
+            }
+        }
+        return minPrice == Integer.MAX_VALUE?-1:minPrice;
+
     }
 
     @Test
