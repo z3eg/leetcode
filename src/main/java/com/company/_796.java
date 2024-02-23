@@ -2,6 +2,9 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -48,7 +51,7 @@ public class _796 {
 
     /*Wrong Answer
     36 / 51 testcases passed*/
-    class Node {
+    /*class Node {
         char val;
         Node next;
 
@@ -84,10 +87,29 @@ public class _796 {
             first = first.next;
         }
         return true;
+    }*/
+
+    /*1
+    ms
+            Beats
+28.66%
+    of users with Java*/
+    public boolean rotateString(String s, String goal) {
+        if (s.length() != goal.length())
+            return false;
+        if (s.equals(goal))
+            return true;
+        for (int i = 0; i < goal.length(); i++) {
+            String ns = s.substring(i) + s.substring(0,i);
+            if (ns.equals(goal))
+                return true;
+        }
+        return false;
     }
 
     @Test
     public void test() {
+        assertTrue(rotateString("bbbacddceeb", "ceebbbbacdd"));
         assertTrue(rotateString("abcde", "cdeab"));
         assertFalse(rotateString("abcde", "abced"));
     }
