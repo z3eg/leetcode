@@ -13,7 +13,7 @@ public class _1609 {
             Beats
 38.87%
     of users with Java*/
-    class NodeWrapper {
+    /*class NodeWrapper {
         TreeNode node;
         int depth;
 
@@ -45,5 +45,46 @@ public class _1609 {
             last = cur;
         }
         return true;
+    }*/
+
+    /*14
+    ms
+            Beats
+43.75%
+    of users with Java*/
+    class NodeWrapper {
+        TreeNode node;
+        int depth;
+
+        public NodeWrapper(TreeNode node, int depth) {
+            this.node = node;
+            this.depth = depth;
+        }
     }
+
+    public boolean isEvenOddTree(TreeNode root) {
+        Queue<NodeWrapper> q = new LinkedList<>();
+        NodeWrapper last = null;
+        q.add(new NodeWrapper(root,0));
+        while (!q.isEmpty()) {
+            NodeWrapper cur = q.poll();
+            TreeNode node = cur.node;
+            if (cur.depth%2== node.val%2)
+                return false;
+            if (last!=null && (cur.depth==last.depth)) {
+                if (cur.depth%2==0 && node.val <= last.node.val)
+                    return false;
+                if (cur.depth%2==1 && node.val >= last.node.val)
+                    return false;
+
+            }
+            if (node.left!=null)
+                q.add(new NodeWrapper(node.left, cur.depth+1));
+            if (node.right!=null)
+                q.add(new NodeWrapper(node.right, cur.depth+1));
+            last = cur;
+        }
+        return true;
+    }
+
 }
