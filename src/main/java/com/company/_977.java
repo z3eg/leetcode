@@ -18,8 +18,32 @@ public class _977 {
             Beats
 8.51%
     of users with Java*/
-    public int[] sortedSquares(int[] nums) {
+    /*public int[] sortedSquares(int[] nums) {
         return Arrays.stream(nums).boxed().mapToInt(i -> i*i).sorted().toArray();
+    }*/
+
+    /*438
+    ms
+            Beats
+5.01%
+    of users with Java*/
+    public int[] sortedSquares(int[] nums) {
+        boolean sorted = false;
+        for (int i = 0; i < nums.length; i++) {
+            nums[i]*=nums[i];
+        }
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < nums.length-1; i++) {
+                if (nums[i] > nums[i+1]) {
+                    sorted = false;
+                    int tmp = nums[i];
+                    nums[i] = nums[i+1];
+                    nums[i+1] = tmp;
+                }
+            }
+        }
+        return nums;
     }
 
     @Test
