@@ -27,7 +27,7 @@ public class _977 {
             Beats
 5.01%
     of users with Java*/
-    public int[] sortedSquares(int[] nums) {
+    /*public int[] sortedSquares(int[] nums) {
         boolean sorted = false;
         for (int i = 0; i < nums.length; i++) {
             nums[i]*=nums[i];
@@ -43,6 +43,19 @@ public class _977 {
                 }
             }
         }
+        return nums;
+    }*/
+
+    /*7
+    ms
+            Beats
+    45.63%
+    of users with Java*/
+    public int[] sortedSquares(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            nums[i]*=nums[i];
+        }
+        Arrays.sort(nums);
         return nums;
     }
 
