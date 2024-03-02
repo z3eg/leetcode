@@ -52,9 +52,8 @@ public class _977 {
     45.63%
     of users with Java*/
     public int[] sortedSquares(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++)
             nums[i]*=nums[i];
-        }
         Arrays.sort(nums);
         return nums;
     }
