@@ -5,26 +5,27 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class _930 {
+
+    /*1842
+    ms
+    Beats
+    5.25%
+    of users with Java*/
     public int numSubarraysWithSum(int[] nums, int goal) {
-        int l = 0;
-        int r = 0;
-        int curSum = 0;
-        int res = 0;
-        while (r < nums.length) {
-            while (curSum < goal) {
-                r++;
-                curSum+=nums[r];
-            }
-            while (curSum > goal && l<r) {
-                l++;
-                curSum-=nums[l];
-            }
-            while (curSum == goal && l<r) {
-                res++;
-                l++;
-            }
+        int k = goal;
+        int numOfSubArrays = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int localSum = 0;
+            int curRightPos = i;
+            do {
+                localSum+=nums[curRightPos];
+                curRightPos++;
+                if (localSum==k) {
+                    numOfSubArrays++;
+                }
+            } while (curRightPos<nums.length);
         }
-        return res;
+        return numOfSubArrays;
     }
 
     @Test
