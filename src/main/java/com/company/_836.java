@@ -20,7 +20,7 @@ public class _836 {
 
     /*Wrong Answer
 36 / 40 testcases passed*/
-    public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
+    /*public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
         return rec1DotInRec2(rec1, rec2)
                 || rec1DotInRec2(rec2, rec1);
     }
@@ -36,6 +36,14 @@ public class _836 {
     boolean inBetween(int x, int y, int x1, int y1, int x2, int y2) {
         return x >= x1 && y > y1 && x <= x2 && y < y2
                 || x > x1 && y >= y1 && x < x2 && y <= y2;
+    }*/
+
+    public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
+        return true;
+    }
+
+    public boolean isRectangleOverlap(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        return (ax1 >= bx1 && ax1 <= bx2 || ax2 >= bx1 && ax2 >= bx2)
     }
 
     @Test
