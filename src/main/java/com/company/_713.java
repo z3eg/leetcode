@@ -79,7 +79,7 @@ public class _713 {
         return counter;
     }*/
 
-    public int numSubarrayProductLessThanK(int[] nums, int k) {
+    /*public int numSubarrayProductLessThanK(int[] nums, int k) {
         double[][] dp = new double[nums.length][nums.length];
         int window = nums.length;
         int counter = 0;
@@ -112,6 +112,29 @@ public class _713 {
             }
         }
         return dp[start][end];
+    }*/
+
+    //DO SLIDING WINDOW BUT BACK AND FORTH REMOVING AN ELEMENT AS WINDOW SHRINKS (OR ADDING AS IT GROWS)
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int window = nums.length;
+        int counter = 0;
+        while (window > 0) {
+            double curProduct = 1;
+            for (int i = 0; i < window; i++) {
+                curProduct*=nums[i];
+            }
+            if (curProduct<k)
+                counter++;
+            //moving window
+            for (int i = window; i < nums.length; i++) {
+                curProduct/=nums[i-window];
+                curProduct*=nums[i];
+                if (curProduct<k)
+                    counter++;
+            }
+            window--;
+        }
+        return counter;
     }
 
 
