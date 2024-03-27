@@ -56,6 +56,7 @@ public class _713 {
 
     /*Time Limit Exceeded
 66 / 98 testcases passed*/
+    //probs need to DP
     public int numSubarrayProductLessThanK(int[] nums, int k) {
         int window = nums.length;
         int counter = 0;
