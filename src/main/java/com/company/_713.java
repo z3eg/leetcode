@@ -32,11 +32,35 @@ public class _713 {
 
     /*Wrong Answer
 34 / 98 testcases passed*/
-    public int numSubarrayProductLessThanK(int[] nums, int k) {
+    /*public int numSubarrayProductLessThanK(int[] nums, int k) {
         int window = nums.length;
         int counter = 0;
         while (window > 0) {
             long curProduct = 1;
+            for (int i = 0; i < window; i++) {
+                curProduct*=nums[i];
+            }
+            if (curProduct<k)
+                counter++;
+            //moving window
+            for (int i = window; i < nums.length; i++) {
+                curProduct/=nums[i-window];
+                curProduct*=nums[i];
+                if (curProduct<k)
+                    counter++;
+            }
+            window--;
+        }
+        return counter;
+    }*/
+
+    /*Time Limit Exceeded
+66 / 98 testcases passed*/
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int window = nums.length;
+        int counter = 0;
+        while (window > 0) {
+            double curProduct = 1;
             for (int i = 0; i < window; i++) {
                 curProduct*=nums[i];
             }
