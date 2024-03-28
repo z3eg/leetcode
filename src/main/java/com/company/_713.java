@@ -116,23 +116,44 @@ public class _713 {
 
     //DO SLIDING WINDOW BUT BACK AND FORTH REMOVING AN ELEMENT AS WINDOW SHRINKS (OR ADDING AS IT GROWS)
     public int numSubarrayProductLessThanK(int[] nums, int k) {
-        int window = nums.length;
+        boolean goingLeft = true;
+        int window = 1;
         int counter = 0;
-        while (window > 0) {
-            double curProduct = 1;
-            for (int i = 0; i < window; i++) {
-                curProduct*=nums[i];
+        double curProduct = 1;
+        int l = 0;
+        int r = 0;
+        while (window <= nums.length) {
+            if (goingLeft) {
+                while (r<nums.length) {
+                    curProduct*=nums[r];
+                    if (curProduct < k)
+                        counter++;
+                    curProduct/=nums[l];
+                    r++;
+                    l++;
+                }
+                l-=2;
+                r--;
+                curProduct*=nums[r];
+                goingLeft=false;
+                window++;
             }
-            if (curProduct<k)
-                counter++;
-            //moving window
-            for (int i = window; i < nums.length; i++) {
-                curProduct/=nums[i-window];
-                curProduct*=nums[i];
-                if (curProduct<k)
-                    counter++;
+            if (!goingLeft) {
+                while (l>=0) {
+                    curProduct*=nums[l];
+                    if (curProduct < k) {
+                        counter++;
+                    }
+                    curProduct/=nums[r];
+                    r--;
+                    l--;
+                }
+                r+=2;
+                l++;
+                curProduct*=nums[l];
+                goingLeft=true;
+                window++;
             }
-            window--;
         }
         return counter;
     }
@@ -140,8 +161,8 @@ public class _713 {
 
     @Test
     public void test() {
+        assertEquals(8, numSubarrayProductLessThanK(new int[]{10,5,2,6}, 100));
+        assertEquals(18, numSubarrayProductLessThanK(new int[]{10,9,10,4,3,8,3,3,6,2,10,10,9,3}, 19));
         assertEquals(0, numSubarrayProductLessThanK(new int[]{1,2,3}, 0));
-//        assertEquals(18, numSubarrayProductLessThanK(new int[]{10,9,10,4,3,8,3,3,6,2,10,10,9,3}, 19));
-//        assertEquals(8, numSubarrayProductLessThanK(new int[]{10,5,2,6}, 100));
     }
 }
