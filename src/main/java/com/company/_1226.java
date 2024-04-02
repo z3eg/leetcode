@@ -9,7 +9,7 @@ public class _1226 {
     of users with Java*/
     class DiningPhilosophers {
 
-        boolean[] isEating; //volatile?
+        boolean[] isEating;
 
         public DiningPhilosophers() {
             isEating = new boolean[5];
