@@ -3,6 +3,12 @@ package com.company;
 import org.junit.Test;
 
 public class _1614_MaximumNestingDepthOfTheParentheses {
+
+    /*0
+    ms
+    Beats
+    100.00%
+    of users with Java*/
     public int maxDepth(String s) {
         int cur = 0;
         int max = 0;
