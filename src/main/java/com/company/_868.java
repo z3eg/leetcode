@@ -10,7 +10,7 @@ public class _868 {
     ms
     Beats
     100.00%
-    of users with Java*/
+    of users with Java */
     public int binaryGap(int n) {
         int prev = -1;
         int counter = 0;
