@@ -9,8 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class _988 {
 
-    /*Wrong Answer
-35 / 70 testcases passed*/
+    /*14
+    ms
+    Beats
+    6.28%
+    of users with Java*/
+    //use stack for storing current word and switch from bfs to dfs?
     class Wrapper {
         TreeNode node;
         String word;
@@ -32,9 +36,6 @@ public class _988 {
             Wrapper poll = q.poll();
             String word = poll.word;
             int curLen = word.length();
-            if (shortest != -1 && curLen > shortest) {
-                break;
-            }
             TreeNode curNode = poll.node;
             char curC = 'a';
             curC+=curNode.val;
