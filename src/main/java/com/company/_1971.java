@@ -57,7 +57,7 @@ public class _1971 {
 
     /*Wrong Answer
     25 / 30 testcases passed*/
-    public boolean validPath(int n, int[][] edges, int source, int destination) {
+    /*public boolean validPath(int n, int[][] edges, int source, int destination) {
         if (source==destination)
             return true;
         if (edges.length==0)
@@ -71,6 +71,37 @@ public class _1971 {
                 if (visited[edge[0]] && !visited[edge[1]]) {
                     if (edge[1]==destination)
                         return true;
+                    newPathFound = true;
+                    visited[edge[1]] = true;
+                }
+                if (visited[edge[1]] && !visited[edge[0]]) {
+                    newPathFound = true;
+                    visited[edge[0]] = true;
+                }
+            }
+        }
+        return false;
+    }*/
+
+    /*3
+    ms
+    Beats
+    99.62%
+    of users with Java*/
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        if (source==destination)
+            return true;
+        if (edges.length==0)
+            return false;
+        boolean[] visited = new boolean[n];
+        visited[source] = true;
+        boolean newPathFound = true;
+        while (newPathFound) {
+            newPathFound = false;
+            if (visited[destination])
+                return true;
+            for (int[] edge : edges) {
+                if (visited[edge[0]] && !visited[edge[1]]) {
                     newPathFound = true;
                     visited[edge[1]] = true;
                 }
