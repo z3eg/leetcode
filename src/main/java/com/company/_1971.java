@@ -8,7 +8,7 @@ public class _1971 {
 
     /*Memory Limit Exceeded
     22 / 30 testcases passed*/
-    public boolean validPath(int n, int[][] edges, int source, int destination) {
+    /*public boolean validPath(int n, int[][] edges, int source, int destination) {
         boolean[] visited = new boolean[n];
         boolean[][] paths = new boolean[n][n];
         for (int[] edge : edges) {
@@ -29,5 +29,30 @@ public class _1971 {
             }
         }
         return false;
+    }*/
+
+    /*Wrong Answer
+    23 / 30 testcases passed*/
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        boolean[] visited = new boolean[n];
+        visited[source] = true;
+        boolean newPathFound = true;
+        while (newPathFound) {
+            newPathFound = false;
+            for (int[] edge : edges) {
+                if (visited[edge[0]] && !visited[edge[1]]) {
+                    if (edge[1]==destination)
+                        return true;
+                    newPathFound = true;
+                    visited[edge[1]] = true;
+                }
+                if (visited[edge[1]] && !visited[edge[0]]) {
+                    newPathFound = true;
+                    visited[edge[0]] = true;
+                }
+            }
+        }
+        return false;
     }
+
 }
