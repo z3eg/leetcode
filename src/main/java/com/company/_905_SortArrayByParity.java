@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //https://leetcode.com/problems/sort-array-by-parity/
 public class _905_SortArrayByParity {
 
-    public int[] sortArrayByParity(int[] nums) {
+    /*194ms
+    Beats 5.04%of users with Java*/
+    /*public int[] sortArrayByParity(int[] nums) {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
@@ -24,6 +26,26 @@ public class _905_SortArrayByParity {
             }
         }
         return nums;
+    }*/
+
+    /*1ms
+    Beats 81.28%of users with Java*/
+    public int[] sortArrayByParity(int[] nums) {
+        int[] res = new int[nums.length];
+        int curEv = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]%2==0) {
+                res[curEv]=nums[i];
+                curEv++;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]%2==1) {
+                res[curEv]=nums[i];
+                curEv++;
+            }
+        }
+        return res;
     }
 
     @Test

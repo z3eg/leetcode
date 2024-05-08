@@ -9,7 +9,7 @@ import static com.company._0_Helper.*;
 public class _21_MergeTwoSortedLists {
 
 
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    /*public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode node1 = list1.next;
         ListNode node2 = list2.next;
         ListNode head = node2;
@@ -33,7 +33,19 @@ public class _21_MergeTwoSortedLists {
             node1 = curHead;
         }
         return node2;
-    }
+    }*/
+
+    /*public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        //merge list 2 into list
+        ListNode head;
+        if (list1.val > list2.val) {
+            head = list1;
+        }
+        else {
+            head = list2;
+        }
+        while ()
+    }*/
 
     @Test
     public void test() {

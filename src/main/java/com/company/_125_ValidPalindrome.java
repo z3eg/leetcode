@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 //https://leetcode.com/problems/valid-palindrome/
 public class _125_ValidPalindrome {
 
-    public boolean isPalindrome(String s) {
+    /*3ms
+    Beats 92.09%of users with Java*/
+    /*public boolean isPalindrome(String s) {
         s = s.toLowerCase();
         int left = 0;
         int right = s.length()-1;
@@ -30,27 +32,37 @@ public class _125_ValidPalindrome {
             }
         }
         return true;
+    }*/
+
+    /*2ms
+    Beats 99.67%of users with Java*/
+    public boolean isPalindrome(String s) {
+        String lc = s.toLowerCase();
+        int l = 0;
+        int r = s.length()-1;
+        char[] cA = lc.toCharArray();
+        while (l < r && l < cA.length && r >= 0) {
+            while (!((cA[l]<=122 && cA[l] >= 97) || (cA[l]<=57 && cA[l] >= 48))) {
+                l++;
+                if (l >= r)
+                    return true;
+            }
+            while (!((cA[r]<=122 && cA[r] >= 97) || (cA[r]<=57 && cA[r] >= 48))) {
+                r--;
+                if (r <= l)
+                    return true;
+            }
+            if (cA[l]!=cA[r])
+                return false;
+            l++;
+            r--;
+        }
+        return true;
     }
-
-    /*Example 1:
-
-Input: s = "A man, a plan, a canal: Panama"
-Output: true
-Explanation: "amanaplanacanalpanama" is a palindrome.
-Example 2:
-
-Input: s = "race a car"
-Output: false
-Explanation: "raceacar" is not a palindrome.
-Example 3:
-
-Input: s = " "
-Output: true
-Explanation: s is an empty string "" after removing non-alphanumeric characters.
-Since an empty string reads the same forward and backward, it is a palindrome.*/
 
     @Test
     public void test() {
+        assertFalse(isPalindrome("0P"));
         assertTrue(isPalindrome(",."));
         assertTrue(isPalindrome("A man, a plan, a canal: Panama"));
         assertTrue(isPalindrome(" "));

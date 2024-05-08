@@ -33,6 +33,9 @@ public class _347_TopKFrequentElements {
         return res;
     }*/
 
+
+    /*8ms
+Beats 99.00%of users with Java*/
     public int[] topKFrequent(int[] nums, int k) {
         HashMap<Integer, Integer> freqMap = new HashMap<>();
         for (int n : nums) {

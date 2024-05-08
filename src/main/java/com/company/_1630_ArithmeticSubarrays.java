@@ -22,7 +22,7 @@ public class _1630_ArithmeticSubarrays {
         return res;
     }
 
-    private boolean canBeArithmeticArray(int[] arr) {
+    /*private boolean canBeArithmeticArray(int[] arr) {
         int maxVal = Integer.MIN_VALUE;
         int maxValPos = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -52,14 +52,19 @@ public class _1630_ArithmeticSubarrays {
                 return false;
         }
         return true;
-    }
+    }*/
 
     /*Runtime
 19 ms
             Beats
 86.13%
 */
-    /*private boolean canBeArithmeticArray(int[] arr) {
+    /*17
+    ms
+            Beats
+77.20%
+    of users with Java*/
+    private boolean canBeArithmeticArray(int[] arr) {
         Arrays.sort(arr);
         int firstDiff = arr[1]-arr[0];
         for (int i = 1; i < arr.length-1; i++) {
@@ -67,7 +72,7 @@ public class _1630_ArithmeticSubarrays {
                 return false;
         }
         return true;
-    }*/
+    }
 
     @Test
     public void test() {

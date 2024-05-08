@@ -12,7 +12,9 @@ import static org.junit.Assert.assertEquals;
 //https://leetcode.com/problems/find-the-difference/
 public class _389_FindTheDifference {
 
-    public char findTheDifference(String s, String t) {
+    /*13ms
+    Beats 8.09%of users with Java*/
+    /*public char findTheDifference(String s, String t) {
         HashMap<Character, Integer> sMap = new HashMap<>();
         HashMap<Character, Integer> tMap = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
@@ -38,6 +40,28 @@ public class _389_FindTheDifference {
             Integer times = next.getValue();
             if (!Objects.equals(sMap.get(letter), times)) {
                 return letter;
+            }
+        }
+        return 'a';
+    }*/
+
+    /*1ms
+    Beats 100.00%of users with Java*/
+    public char findTheDifference(String s, String t) {
+        int[] freqs = new int[26];
+        for (char c : s.toCharArray()) {
+            freqs[c-'a']++;
+        }
+        for (char c : t.toCharArray()) {
+            freqs[c-'a']--;
+        }
+        for (int i = 0; i < freqs.length; i++) {
+            if (freqs[i]==-1) {
+                char res = 'a';
+                for (int j = 0; j < i; j++) {
+                    res++;
+                }
+                return res;
             }
         }
         return 'a';
