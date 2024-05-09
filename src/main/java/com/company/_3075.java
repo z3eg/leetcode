@@ -2,12 +2,30 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class _3075 {
 
+    /*Wrong Answer
+660 / 674 testcases passed*/
     public long maximumHappinessSum(int[] happiness, int k) {
-        return 0;
+        Arrays.sort(happiness);
+        int res = 0;
+        int rounds = 0;
+        int totReduced = 0;
+        while (k>0) {
+            rounds++;
+            int cur = happiness[happiness.length - rounds];
+            cur-=totReduced;
+            if (cur > 0) {
+                res+=cur;
+            }
+            k--;
+            totReduced++;
+        }
+        return res;
     }
 
     @Test
