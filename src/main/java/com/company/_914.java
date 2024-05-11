@@ -77,7 +77,7 @@ public class _914 {
 
     /*Wrong Answer
 68 / 75 testcases passed*/
-    public boolean hasGroupsSizeX(int[] deck) {
+    /*public boolean hasGroupsSizeX(int[] deck) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int c : deck) {
             Integer am = map.get(c);
@@ -115,5 +115,32 @@ public class _914 {
                 return i;
         }
         return -1;
+    }*/
+
+
+    /*11
+    ms
+    Beats
+    62.24%
+    of users with Java*/
+    public boolean hasGroupsSizeX(int[] deck) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int c : deck) {
+            Integer am = map.get(c);
+            if (am == null) {
+                am = 0;
+            }
+            am++;
+            map.put(c, am);
+        }
+        int min = map.values().stream().min(Comparator.naturalOrder()).get();
+        foo: for (int i = 2; i <= min; i++) {
+            for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+                if (e.getValue()%i != 0)
+                    continue foo;
+            }
+            return true;
+        }
+        return false;
     }
 }
