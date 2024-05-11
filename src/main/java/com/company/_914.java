@@ -52,7 +52,7 @@ public class _914 {
 
     /*Wrong Answer
 71 / 75 testcases passed*/
-    public boolean hasGroupsSizeX(int[] deck) {
+    /*public boolean hasGroupsSizeX(int[] deck) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int c : deck) {
             Integer am = map.get(c);
@@ -72,5 +72,48 @@ public class _914 {
                 return false;
         }
         return true;
+    }*/
+
+
+    /*Wrong Answer
+68 / 75 testcases passed*/
+    public boolean hasGroupsSizeX(int[] deck) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int c : deck) {
+            Integer am = map.get(c);
+            if (am == null) {
+                am = 0;
+            }
+            am++;
+            map.put(c, am);
+        }
+        int lcd = 0;
+        for (Map.Entry<Integer, Integer> e1 : map.entrySet()) {
+            if (e1.getValue() < 2)
+                return false;
+            for (Map.Entry<Integer, Integer> e2 : map.entrySet()) {
+                if (e1.getKey()!=e2.getKey()) {
+                    int curLcd = lcd(e1.getValue(), e2.getValue());
+                    if (lcd == 0)
+                        lcd = curLcd;
+                    else {
+                        if (curLcd == -1)
+                            return false;
+                        else if (curLcd != lcd)
+                            return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    int lcd(int a, int b) {
+        int min = Math.min(a,b);
+        for (int i = 2; i <= min; i++) {
+            if (a%i == 0 && b%i==0)
+                return i;
+        }
+        return -1;
     }
 }
