@@ -2,6 +2,12 @@ package com.company;
 
 //https://leetcode.com/problems/largest-local-values-in-a-matrix/
 public class _2373_LargestLocalValuesInAMatrix {
+
+    /*2
+    ms
+    Beats
+    100.00%
+    of users with Java*/
     public int[][] largestLocal(int[][] grid) {
         int resHeight = grid.length - 2;
         int resWidth = grid[0].length - 2;
