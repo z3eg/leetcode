@@ -1,26 +1,15 @@
 package com.company;
 
+import com.company.util.tree.bst.TreeNode;
+
 //https://leetcode.com/problems/evaluate-boolean-binary-tree/
 public class _2331_EvaluateBooleanBinaryTree {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
-
+    /*0
+    ms
+    Beats
+    100.00%
+    of users with Java*/
     public boolean evaluateTree(TreeNode root) {
         if (root.left==null || root.right==null) {
             return root.val==1;
@@ -35,10 +24,6 @@ public class _2331_EvaluateBooleanBinaryTree {
                 }
             }
         return false;
-    }
-
-    private boolean intToBool(int i) {
-        return i==1;
     }
 
 
