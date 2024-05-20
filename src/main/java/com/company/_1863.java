@@ -11,6 +11,8 @@ import static org.junit.Assert.assertEquals;
 /*1863. Sum of All Subset XOR Totals
         https://leetcode.com/problems/sum-of-all-subset-xor-totals/*/
 public class _1863 {
+
+    /*0 / 48 testcases passed*/
     public int subsetXORSum(int[] nums) {
         //find all possible subsets
         List<List<Integer>> foundSubsets = new LinkedList<>();
