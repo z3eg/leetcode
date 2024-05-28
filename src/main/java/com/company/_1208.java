@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class _1208 {
     public int equalSubstring(String s, String t, int maxCost) {
+        //populate the array of diffs and do a dynamic sliding window over it.
         return 0;
     }
 
