@@ -21,9 +21,10 @@ public class _1208 {
         while (r < s.length()-1) {
             while (curCost <= maxCost && r < s.length()-1) {
                 curCost+=diffs[r];
-                if (curCost <= maxCost)
-                    maxLen = Math.max(maxLen, r-l+1);
                 r++;
+                if (curCost <= maxCost) {
+                    maxLen = Math.max(maxLen, r-l);
+                }
             }
             while (l < s.length()-1 && (l==r || (curCost > maxCost && l<r))) {
                 l++;
@@ -35,6 +36,7 @@ public class _1208 {
 
     @Test
     public void test() {
+        assertEquals(2, equalSubstring("krrgw","zjxss",19));
         assertEquals(3, equalSubstring("abcd","bcdf",3));
         assertEquals(1, equalSubstring("abcd","cdef",3));
         assertEquals(1, equalSubstring("abcd","acde",0));
