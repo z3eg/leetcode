@@ -2,9 +2,11 @@ package com.company;
 
 public class _344_ReverseString {
     /*Runtime
-    1 ms
+    0
+    ms
     Beats
-    85.68%*/
+    100.00%
+    of users with Java*/
     public void reverseString(char[] s) {
         char tmp;
         for (int i = 0; i < s.length / 2; i++) {
