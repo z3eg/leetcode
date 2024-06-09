@@ -50,13 +50,8 @@ public class _786 {
         }
     }
 
-    /*777
-    ms
-    Beats
-    6.11%
-    of users with Java*/
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        Queue<Node> q = new PriorityQueue<Node>((o1, o2) -> Double.compare(o1.val, o2.val));
+        Queue<Node> q = new PriorityQueue<>(Comparator.comparingDouble(o -> o.val));
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length; j++) {
                 if (i!=j)
@@ -70,4 +65,25 @@ public class _786 {
         }
         return q.poll().nums;
     }
+
+    /*777
+    ms
+    Beats
+    6.11%
+    of users with Java*/
+    /*public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        Queue<Node> q = new PriorityQueue<Node>((o1, o2) -> Double.compare(o1.val, o2.val));
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (i!=j)
+                    q.offer(new Node(arr[i],arr[j]));
+            }
+        }
+        int counter = 1;
+        while (k>counter) {
+            q.poll();
+            counter++;
+        }
+        return q.poll().nums;
+    }*/
 }
