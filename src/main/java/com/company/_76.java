@@ -12,11 +12,14 @@ public class _76 {
 
 
 //    265 / 268 testcases passed
-    public String minWindow(String s, String t) {
+/*    public String minWindow(String s, String t) {
+        if (s.equals(t))
+            return s;
         int tLen = t.length();
         int sLen = s.length();
-        if (sLen < tLen)
+        if (sLen < tLen) {
             return "";
+        }
         int[] freqs = new int[58];
         boolean[] care = new boolean[58];
         for (int i = 0; i < tLen; i++) {
@@ -28,12 +31,12 @@ public class _76 {
         int winSize = tLen-1;
         int l = 0;
         int r = winSize-1;
-        Deque<Character> win = new LinkedList<>();
+//        Deque<Character> win = new LinkedList<>();
         for (int i = l; i <= r; i++) {
             char c = s.charAt(i);
             int curPos = c-'A';
             freqs[curPos]--;
-            win.addLast(c);
+//            win.addLast(c);
         }
         boolean goingRight = false;
         while (winSize<sLen) {
@@ -41,36 +44,100 @@ public class _76 {
                 goingRight = true;
                 r++;
                 add(freqs, r, s);
-                win.addLast(s.charAt(r));
+//                win.addLast(s.charAt(r));
                 winSize++;
             }
             else if (r==sLen-1 && goingRight) {
                 goingRight = false;
                 l--;
                 add(freqs, l, s);
-                win.addFirst(s.charAt(l));
+//                win.addFirst(s.charAt(l));
                 winSize++;
             }
             else if (goingRight) {
                 rem(freqs, l, s);
-                win.removeFirst();
+//                win.removeFirst();
                 l++;
                 r++;
                 add(freqs, r, s);
-                win.addLast(s.charAt(r));
+//                win.addLast(s.charAt(r));
             }
             else {
                 l--;
                 add(freqs, l, s);
-                win.addFirst(s.charAt(l));
+//                win.addFirst(s.charAt(l));
                 rem(freqs, r, s);
-                win.removeLast();
+//                win.removeLast();
                 r--;
             }
             if (match(care,freqs))
                 return s.substring(l, r+1);
         }
         return "";
+    }*/
+
+
+    /*Runtime
+168
+ms
+Beats
+5.70%*/
+    public String minWindow(String s, String t) {
+        if (s.equals(t))
+            return s;
+        int tLen = t.length();
+        int sLen = s.length();
+        if (sLen < tLen) {
+            return "";
+        }
+        int[] freqs = new int[58];
+        boolean[] care = new boolean[58];
+        for (int i = 0; i < tLen; i++) {
+            char c = t.charAt(i);
+            int curPos = c-'A';
+            freqs[curPos]++;
+            care[curPos] = true;
+        }
+        int l = 0;
+        int r = 0;
+        String res = null;
+//        Deque<Character> q = new LinkedList<>();
+//        add(freqs,r,s);
+//        q.addLast(s.charAt(r));
+        while (r < sLen) {
+            while (match(care, freqs) && l<r) {
+                //shrinking
+                String sub = s.substring(l, r);
+                if (res == null || res.length() > sub.length())
+                    res = sub;
+                rem(freqs, l, s);
+//                q.removeFirst();
+                l++;
+            }
+            while (!match(care, freqs) && r < sLen)
+            {
+                //expanding
+                add(freqs, r, s);
+//                q.addLast(s.charAt(r));
+                r++;
+            }
+        }
+        //r reached end, gonna shrink now while it matches
+        while (match(care, freqs)) {
+            //shrinking
+            String sub = s.substring(l, r);
+            if (res == null || res.length() > sub.length())
+                res = sub;
+            rem(freqs, l, s);
+//            q.removeFirst();
+            l++;
+        }
+        if (match(care, freqs)) {
+            String sub = s.substring(l, r);
+            if (res == null || res.length() > sub.length())
+                res = sub;
+        }
+        return res==null?"":res;
     }
 
     void add(int[] freqs, int pos, String s) {
@@ -95,6 +162,7 @@ public class _76 {
     @Test
     public void test() {
         assertEquals("BANC", minWindow("ADOBECODEBANC","ABC"));
+        assertEquals("a", minWindow("ab","a"));
         assertEquals("a", minWindow("a","a"));
         assertEquals("", minWindow("a","aa"));
     }
