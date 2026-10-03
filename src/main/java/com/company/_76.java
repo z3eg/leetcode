@@ -234,7 +234,7 @@ Beats
 11
 ms
 Beats
-58.92%
+59.11%
 */
     public String minWindow(String s, String t) {
         if (s.equals(t))
