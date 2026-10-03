@@ -236,7 +236,7 @@ ms
 Beats
 59.11%
 */
-    public String minWindow(String s, String t) {
+    /*public String minWindow(String s, String t) {
         if (s.equals(t))
             return s;
         int tLen = t.length();
@@ -302,11 +302,11 @@ Beats
 //            q.removeFirst();
             l++;
         }
-        /*if (match(care, freqs)) {
+        *//*if (match(care, freqs)) {
             String sub = s.substring(l, r);
             if (res == null || res.length() > sub.length())
                 res = sub;
-        }*/
+        }*//*
         return s.substring(lRes,rRes);
     }
 
@@ -326,6 +326,108 @@ Beats
                 return false;
         }
         return true;
+    }*/
+
+    public String minWindow(String s, String t) {
+        if (s.equals(t))
+            return s;
+        int tLen = t.length();
+        int sLen = s.length();
+        if (sLen < tLen) {
+            return "";
+        }
+        int[] freqs = new int[58];
+        Set<Integer> valPos = new HashSet<>();
+        for (int i = 0; i < tLen; i++) {
+            char c = t.charAt(i);
+            int curPos = c-'A';
+            freqs[curPos]++;
+            valPos.add(curPos);
+        }
+        int[] valPosA = new int[valPos.size()];
+        int i = 0;
+        for(int val : valPos)
+            valPosA[i++] = val;
+        int l = 0;
+        int r = 0;
+        int lRes = 0;
+        int rRes = 0;
+        int minDiff = sLen;
+        String res = null;
+        boolean matchedBefore = false;
+        char prevChar = s.charAt(0);
+//        Deque<Character> q = new LinkedList<>();
+//        add(freqs,r,s);
+//        q.addLast(s.charAt(r));
+        while (r < sLen) {
+            while ((matchedBefore=match(valPosA, freqs, matchedBefore, false, prevChar)) && l<r) {
+                //shrinking
+//                String sub = s.substring(l, r);
+
+                if (minDiff >= r-l)
+                {
+                    minDiff = r-l;
+                    lRes = l;
+                    rRes = r;
+                }
+                prevChar = rem(freqs, l, s);
+//                q.removeFirst();
+                l++;
+            }
+            while (!(matchedBefore = match(valPosA, freqs, matchedBefore, false, prevChar)) && r < sLen)
+            {
+                //expanding
+                prevChar = add(freqs, r, s);
+//                q.addLast(s.charAt(r));
+                r++;
+            }
+        }
+        //r reached end, gonna shrink now while it matches
+        while (match(valPosA, freqs)) {
+            //shrinking
+            if (minDiff >= r-l)
+            {
+                minDiff = r-l;
+                lRes = l;
+                rRes = r;
+            }
+            prevChar = rem(freqs, l, s);
+//            q.removeFirst();
+            l++;
+        }
+        return s.substring(lRes,rRes);
+    }
+
+    char add(int[] freqs, int pos, String s) {
+        char c = s.charAt(pos);
+        freqs[c-'A']--;
+        return c;
+    }
+
+    char rem(int[] freqs, int pos, String s) {
+        char c = s.charAt(pos);
+        freqs[c-'A']++;
+        return c;
+    }
+
+    boolean match(int[] valPos, int[] freqs) {
+        for (int valPo : valPos) {
+            if (freqs[valPo] > 0)
+                return false;
+        }
+        return true;
+    }
+
+    boolean match(int[] valPos, int[] freqs, boolean matchedBefore, boolean isAddition, char c) {
+        if (isAddition) {
+            if (matchedBefore)
+                return true;
+        }
+        else {
+            if (matchedBefore)
+                return freqs[c-'A']-1 > 0;
+        }
+        return match(valPos, freqs);
     }
 
     @Test
