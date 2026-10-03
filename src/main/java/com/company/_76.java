@@ -82,7 +82,7 @@ public class _76 {
 ms
 Beats
 5.70%*/
-    public String minWindow(String s, String t) {
+    /*public String minWindow(String s, String t) {
         if (s.equals(t))
             return s;
         int tLen = t.length();
@@ -138,6 +138,79 @@ Beats
                 res = sub;
         }
         return res==null?"":res;
+    }*/
+
+    /*18
+ms
+Beats
+43.95%*/
+    public String minWindow(String s, String t) {
+        if (s.equals(t))
+            return s;
+        int tLen = t.length();
+        int sLen = s.length();
+        if (sLen < tLen) {
+            return "";
+        }
+        int[] freqs = new int[58];
+        boolean[] care = new boolean[58];
+        for (int i = 0; i < tLen; i++) {
+            char c = t.charAt(i);
+            int curPos = c-'A';
+            freqs[curPos]++;
+            care[curPos] = true;
+        }
+        int l = 0;
+        int r = 0;
+        int lRes = 0;
+        int rRes = 0;
+        int minDiff = sLen;
+        String res = null;
+//        Deque<Character> q = new LinkedList<>();
+//        add(freqs,r,s);
+//        q.addLast(s.charAt(r));
+        while (r < sLen) {
+            while (match(care, freqs) && l<r) {
+                //shrinking
+//                String sub = s.substring(l, r);
+
+                if (minDiff >= r-l)
+                {
+                    minDiff = r-l;
+                    lRes = l;
+                    rRes = r;
+                }
+                rem(freqs, l, s);
+//                q.removeFirst();
+                l++;
+            }
+            while (!match(care, freqs) && r < sLen)
+            {
+                //expanding
+                add(freqs, r, s);
+//                q.addLast(s.charAt(r));
+                r++;
+            }
+        }
+        //r reached end, gonna shrink now while it matches
+        while (match(care, freqs)) {
+            //shrinking
+            if (minDiff >= r-l)
+            {
+                minDiff = r-l;
+                lRes = l;
+                rRes = r;
+            }
+            rem(freqs, l, s);
+//            q.removeFirst();
+            l++;
+        }
+        /*if (match(care, freqs)) {
+            String sub = s.substring(l, r);
+            if (res == null || res.length() > sub.length())
+                res = sub;
+        }*/
+        return s.substring(lRes,rRes);
     }
 
     void add(int[] freqs, int pos, String s) {
@@ -161,6 +234,7 @@ Beats
 
     @Test
     public void test() {
+        assertEquals("abc", minWindow("abc","ac"));
         assertEquals("BANC", minWindow("ADOBECODEBANC","ABC"));
         assertEquals("a", minWindow("ab","a"));
         assertEquals("a", minWindow("a","a"));
