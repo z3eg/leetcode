@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class _76 {
 
 
-//    192 / 268 testcases passed
+//    265 / 268 testcases passed
     public String minWindow(String s, String t) {
         int tLen = t.length();
         int sLen = s.length();
@@ -86,7 +86,7 @@ public class _76 {
     boolean match(boolean[] care, int[] freqs) {
         for (int i = 0; i < 58; i++) {
             if (care[i])
-                if (freqs[i]!=0)
+                if (freqs[i]>0)
                     return false;
         }
         return true;
