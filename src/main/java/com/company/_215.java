@@ -24,10 +24,10 @@ public class _215 {
         return i-10000;
     }*/
 
-    /*3
+    /*2
 ms
 Beats
-99.87%*/
+100.00%*/
     public int findKthLargest(int[] nums, int k) {
         int[] freqs = new int[20001];
         for (int n : nums)
