@@ -10,7 +10,7 @@ public class _215 {
 
     /*3ms
     Beats 99.51%of users with Java*/
-    public int findKthLargest(int[] nums, int k) {
+    /*public int findKthLargest(int[] nums, int k) {
         int[] freqs = new int[20001];
         for (int n : nums)
             freqs[n+10000]++;
@@ -18,6 +18,24 @@ public class _215 {
         for (i = freqs.length-1; i > 0 && k >= 1; i--) {
             if (freqs[i]!=0)
                 k-=freqs[i];
+            if (k<=0)
+                return i-10000;
+        }
+        return i-10000;
+    }*/
+
+    /*3
+ms
+Beats
+99.87%*/
+    public int findKthLargest(int[] nums, int k) {
+        int[] freqs = new int[20001];
+        for (int n : nums)
+            freqs[n+10000]++;
+        int i = freqs.length;
+        while (i>0) {
+            i--;
+            k-=freqs[i];
             if (k<=0)
                 return i-10000;
         }
