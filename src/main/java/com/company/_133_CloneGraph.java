@@ -3,7 +3,9 @@ package com.company;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //https://leetcode.com/problems/clone-graph/
 public class _133_CloneGraph {
@@ -25,38 +27,30 @@ public class _133_CloneGraph {
         }
     }
 
+    /*23
+ms
+Beats
+95.25%
+*/
+
     public Node cloneGraph(Node node) {
-        if (node == null) {
+        if (node == null)
             return null;
-        }
-        Node startNode = new Node(node.val);
-        if (node.neighbors.size() == 0) {
-            return startNode;
-        }
-        Node curNode = node.neighbors.get(0);
-        while (curNode!=node) {
-            Node neighbour = new Node(curNode.val);
-            neighbour.neighbors.add(startNode);
-            startNode.neighbors.add(neighbour);
-            curNode = curNode.neighbors.get(0);
-        }
-        return startNode;
+        Map<Integer,Node> exNodes = new HashMap<>();
+        return cloneNode(node, exNodes);
     }
 
-    public int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    private String strOfLen(int length) {
-        char[] chars = new char[length];
-        for (int i = 0; i < chars.length; i++) {
-            chars[i] = (char) getRandomNumber(65,90);
+    public Node cloneNode(Node node, Map<Integer,Node> clonedNodes) {
+        if (clonedNodes.containsKey(node.val))
+            return clonedNodes.get(node.val);
+        Node clone = new Node(node.val);
+        clonedNodes.put(node.val, clone);
+        List<Node> oldNeighbors = node.neighbors;
+        ArrayList<Node> newNeighbors = new ArrayList<>();
+        for (Node n : oldNeighbors) {
+            newNeighbors.add(cloneNode(n, clonedNodes));
         }
-        return new String(chars);
-    }
-
-    @Test
-    public void testStrOfLen() {
-        System.out.println(strOfLen(100));
+        clone.neighbors = newNeighbors;
+        return clone;
     }
 }
