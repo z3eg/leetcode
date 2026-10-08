@@ -6,10 +6,11 @@ import java.util.*;
 
 public class _49 {
 
-    /*8
+    /*7
 ms
 Beats
-35.79%*/
+72.83%
+*/
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> res = new LinkedList<>();
         HashMap<String, List<String>> map = new HashMap<>();
