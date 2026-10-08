@@ -6,23 +6,23 @@ import java.util.*;
 
 public class _49 {
 
-    /*19
+    /*8
 ms
 Beats
-16.93%*/
+35.79%*/
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> res = new LinkedList<>();
         HashMap<String, List<String>> map = new HashMap<>();
         for (String s : strs) {
-            int[] fMap = genFreqmap(s);
-            map.computeIfAbsent(Arrays.toString(fMap), k -> new LinkedList<>()).add(s);
+            char[] fMap = genFreqmap(s);
+            map.computeIfAbsent(new String(fMap), k -> new LinkedList<>()).add(s);
         }
         map.values().forEach(v->res.add(v));
         return res;
     }
 
-    int[] genFreqmap(String str) {
-        int[] freqMap = new int[26];
+    char[] genFreqmap(String str) {
+        char[] freqMap = new char[26];
         for (int i = 0; i < str.length(); i++) {
             freqMap[str.charAt(i)-'a']++;
         }
