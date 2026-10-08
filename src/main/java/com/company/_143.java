@@ -4,22 +4,33 @@ import com.company.util.list.ListNode;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class _143 {
+
+    /*4
+ms
+Beats
+10.56%*/
     public void reorderList(ListNode head) {
-        Deque<ListNode> stack = new LinkedList<>();
-        ListNode head2 = head;
-        while (head2.next!=null) {
-            stack.add(head2);
-            head2 = head2.next;
+        if (head == null || head.next == null || head.next.next==null)
+            return;
+        ListNode headP = head;
+        Stack<ListNode> stack = new Stack<>();
+        while (head!=null) {
+            stack.add(head);
+            head = head.next;
         }
-        head2 = head;
-        int len = stack.size();
-        while (stack.size()>len/2) {
-            ListNode node = stack.pop();
-            node.next = head2.next;
-            head2.next = node;
-            head2 = node.next;
+        int halfSize = stack.size() / 2;
+        int end = stack.size()%2==0?halfSize-1:halfSize;
+        for (int i = 0; i < end; i++) {
+            ListNode next = headP.next;
+            ListNode pop = stack.pop();
+            headP.next = pop;
+            pop.next = next;
+            headP = next;
         }
+        ListNode pop = stack.pop();
+        pop.next = null;
     }
 }
