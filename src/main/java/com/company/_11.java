@@ -7,12 +7,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class _11 {
 
     /*TLE 59 / 65 testcases passed*/
-    public int maxArea(int[] height) {
+    /*public int maxArea(int[] height) {
         int hLen = height.length;
         int maxWater = 0;
         for (int i = 0; i < hLen - 1; i++) {
             for (int j = i+1; j < hLen; j++) {
                 maxWater = Math.max(maxWater,((j-i)*Math.min(height[i],height[j])));
+            }
+        }
+        return maxWater;
+    }*/
+
+    /*6
+ms
+Beats
+82.33%
+*/
+    public int maxArea(int[] height) {
+        int hLen = height.length;
+        int maxWater = 0;
+        int l = 0;
+        int r = hLen - 1;
+        while (l<r) {
+            int lHeight = height[l];
+            int rHeight = height[r];
+            maxWater = Math.max(maxWater,((r-l)*Math.min(lHeight, rHeight)));
+            if (lHeight < rHeight)
+                l++;
+            else if (lHeight > rHeight)
+                r--;
+            else {
+                l++;
+                r--;
             }
         }
         return maxWater;
