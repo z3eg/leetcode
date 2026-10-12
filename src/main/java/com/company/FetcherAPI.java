@@ -11,14 +11,15 @@ public class FetcherAPI {
 
     class Page {
 
+        private static final int PAGE_SIZE = 7;
         int pageNumber;
         private final List<Integer> content;
 
         public Page(int pageNumber) {
             this.pageNumber = pageNumber;
             this.content = new ArrayList<>();
-            int firstRes = pageNumber*10;
-            int lastRes = (pageNumber+1)*10;
+            int firstRes = pageNumber*PAGE_SIZE;
+            int lastRes = (pageNumber+1)*PAGE_SIZE;
             for (int i = firstRes; i <= lastRes; i++)
                 this.content.add(i);
         }
@@ -35,18 +36,18 @@ public class FetcherAPI {
 
     class Fetcher {
 
-        private static final int PAGE_SIZE = 10;
+        private static final int PAGE_SIZE = 7;
         Client client;
         Page curPage;
-        int lastCalledNum;
-        int lastFetchedNum;
+        int lastPulledNum;
+        int curNum;
         int curPageNum;
 
         public Fetcher(Client client) {
             this.client = client;
             this.curPage = client.getPage(0);
-            this.lastCalledNum = PAGE_SIZE-1;
-            this.lastFetchedNum = -1;
+            this.lastPulledNum = PAGE_SIZE-1;
+            this.curNum = -1;
             this.curPageNum = 0;
         }
 
@@ -55,19 +56,17 @@ public class FetcherAPI {
             List<Integer> res = new ArrayList<>();
             if (n==0)
                 return res;
-            int lastNumToFetch = lastFetchedNum+n;
-            int curNum = lastFetchedNum;
+            int lastNumToFetch = curNum +n;
             List<Integer> curContent = curPage.getContent();
-            while (curNum<lastNumToFetch) {
+            while (curNum <lastNumToFetch) {
                 curNum++;
-                if (curNum>this.lastCalledNum) {
+                if (curNum >this.lastPulledNum) {
                     curPage = client.getPage(++this.curPageNum);
                     curContent = curPage.getContent();
-                    this.lastCalledNum+=PAGE_SIZE;
+                    this.lastPulledNum +=PAGE_SIZE;
                 }
-                res.add(curContent.get(curNum%PAGE_SIZE));
+                res.add(curContent.get(curNum %PAGE_SIZE));
             }
-            lastFetchedNum = curNum;
             return res;
         }
     }
