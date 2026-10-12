@@ -1,33 +1,42 @@
 package com.company;
 
 import com.company.util.tree.bst.TreeNode;
+import org.junit.Test;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class _572 {
 
-    /*Wrong Answer
-164 / 185 testcases passed*/
+    /*3
+ms
+Beats
+64.15%
+*/
 
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
-        TreeNode foundSubRoot = findSubroot(root, subRoot);
-        if (foundSubRoot==null)
+        LinkedList<TreeNode> subRoots = new LinkedList<>();
+        findSubroots(root, subRoot, subRoots);
+        if (subRoots.isEmpty())
             return false;
-        return areEqual(foundSubRoot,subRoot);
+        for (TreeNode subroot : subRoots) {
+            if (areEqual(subroot, subRoot))
+                return true;
+        }
+        return false;
     }
 
-    TreeNode findSubroot(TreeNode root, TreeNode subRoot) {
+    void findSubroots(TreeNode root, TreeNode subRoot, List<TreeNode> subRoots) {
         if (root == null)
-            return null;
+            return;
         if (subRoot == null)
-            return null;
+            return;
         if (root.val == subRoot.val)
-            return root;
-        TreeNode left = findSubroot(root.left, subRoot);
-        if (left!= null)
-            return left;
-        TreeNode right = findSubroot(root.right, subRoot);
-        if (right!=null)
-            return right;
-        return null;
+            subRoots.add(root);
+        findSubroots(root.left, subRoot,subRoots);
+        findSubroots(root.right, subRoot,subRoots);
     }
 
     boolean areEqual(TreeNode root, TreeNode root2) {
@@ -41,4 +50,13 @@ public class _572 {
             return false;
         return areEqual(root.left, root2.left) && areEqual(root.right, root2.right);
     }
+
+    @Test
+    public void test() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(1);
+        TreeNode subroot = new TreeNode(1);
+        assertTrue(isSubtree(root,subroot));
+    }
+
 }
