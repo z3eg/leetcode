@@ -73,12 +73,9 @@ Beats
             return false;
         if (subRoot == null)
             return false;
-        if (root.val == subRoot.val)
-            if (areEqual(root, subRoot))
-                return true;
-        if (isSubtree(root.left, subRoot))
+        if (areEqual(root, subRoot))
             return true;
-        return isSubtree(root.right, subRoot);
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
     }
 
     boolean areEqual(TreeNode root, TreeNode root2) {
