@@ -2,6 +2,9 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class _3723 {
@@ -39,7 +42,7 @@ public class _3723 {
         return -1;
     }*/
 
-    public String maxSumOfSquares(int num, int sum) {
+    /*public String maxSumOfSquares(int num, int sum) {
         if (sum>9*num)
             return "";
         //do dfs until depth num while keeping the localSum and sequence and score, starting with 9^2 ending with 1^2
@@ -68,6 +71,40 @@ public class _3723 {
                 return res;
         }
         return -1;
+    }*/
+
+
+    /*19
+ms
+Beats
+90.91%
+*/
+    public String maxSumOfSquares(int num, int sum) {
+
+        char[] res = new char[num];
+        int idx = 0;
+        if (sum>num*9) {
+            return "";
+        }
+        while (sum>9) {
+            res[idx] = '9';
+            idx++;
+            sum-=9;
+            num--;
+        }
+        char c = '0';
+        for (int i = 0; i < sum; i++) {
+            c++;
+        }
+        res[idx] = c;
+        idx++;
+        num--;
+        while (num>0) {
+            res[idx] = '0';
+            idx++;
+            num--;
+        }
+        return new String(res);
     }
 
     @Test
