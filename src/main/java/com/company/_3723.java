@@ -8,7 +8,7 @@ public class _3723 {
 
     /*Time Limit Exceeded
 417 / 1000 testcases passed*/
-    public String maxSumOfSquares(int num, int sum) {
+    /*public String maxSumOfSquares(int num, int sum) {
         if (sum>81*num)
             return "";
         //do dfs until depth num while keeping the localSum and sequence and score, starting with 9^2 ending with 1^2
@@ -33,6 +33,37 @@ public class _3723 {
         for (int i = 9; i >= 0; i--) { //TODO bring me back
 //        for (int i = 0; i <= 9; i++) {
             int res = maxSum(num-1, sum, localSum, i, numSoFar);
+            if (res != -1)
+                return res;
+        }
+        return -1;
+    }*/
+
+    public String maxSumOfSquares(int num, int sum) {
+        if (sum>81*num)
+            return "";
+        //do dfs until depth num while keeping the localSum and sequence and score, starting with 9^2 ending with 1^2
+        //at depth num check if localSum == sum then we got it! return and fail fast!
+        for (int i = 9; i >= 0; i--) { //TODO bring me back once done debugging
+//        for (int i = 0; i <= 9; i++) {
+            int maxSum = maxSum(num-1,sum,i,0);
+            if (maxSum!=-1)
+                return Integer.toString(maxSum);
+        }
+        return "";
+    }
+
+    int maxSum(int num, int sum, int cur, int numSoFar) {
+        if (sum<0)
+            return -1;
+        numSoFar = numSoFar*10+cur;
+        sum-=cur;
+        if (num==0) {
+            return sum==0?numSoFar:-1;
+        }
+        for (int i = 9; i >= 0; i--) { //TODO bring me back
+//        for (int i = 0; i <= 9; i++) {
+            int res = maxSum(num-1, sum, i, numSoFar);
             if (res != -1)
                 return res;
         }
