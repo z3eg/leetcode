@@ -40,7 +40,7 @@ public class _3723 {
     }*/
 
     public String maxSumOfSquares(int num, int sum) {
-        if (sum>81*num)
+        if (sum>9*num)
             return "";
         //do dfs until depth num while keeping the localSum and sequence and score, starting with 9^2 ending with 1^2
         //at depth num check if localSum == sum then we got it! return and fail fast!
