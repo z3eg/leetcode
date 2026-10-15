@@ -52,7 +52,7 @@ public class FetcherAPI {
         }
 
         //get n next results
-        List<Integer> fetch(int n) {
+        List<Integer> fetch(int n) { //implement this
             List<Integer> res = new ArrayList<>();
             if (n==0)
                 return res;
