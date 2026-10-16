@@ -4,7 +4,7 @@ public class _2916 {
 
     /*Time Limit Exceeded
 537 / 542 testcases passed*/
-    class Solution {
+    /*class Solution {
         public int sumCounts(int[] nums) {
             int l = 0;
             int r = 0;
@@ -65,5 +65,10 @@ public class _2916 {
                 uqNums--;
             return uqNums;
         }
-    }
+    }*/
+
+
+    /*public int sumCounts(int[] nums) {
+
+    }*/
 }
